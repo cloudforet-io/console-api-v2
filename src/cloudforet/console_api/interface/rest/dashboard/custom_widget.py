@@ -20,7 +20,7 @@ class CustomWidget(BaseAPI):
     service = 'console-api'
 
     @router.post(
-        's/create',
+        '/create',
     )
     @exception_handler
     async def create(self, request: Request, body: CustomWidgetInfo.Create):
@@ -64,7 +64,7 @@ class CustomWidget(BaseAPI):
             return proxy_service.dispatch_api(params)
 
     @router.post(
-        's/list',
+        '/list',
     )
     @exception_handler
     async def list(self, request: Request, body: CustomWidgetInfo.List):
@@ -75,7 +75,7 @@ class CustomWidget(BaseAPI):
             return proxy_service.dispatch_api(params)
 
     @router.post(
-        's/stat',
+        '/stat',
     )
     @exception_handler
     async def stat(self, request: Request, body: Stat):

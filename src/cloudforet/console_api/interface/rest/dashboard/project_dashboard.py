@@ -20,7 +20,7 @@ class ProjectDashboard(BaseAPI):
     service = 'console-api'
 
     @router.post(
-        's/create',
+        '/create',
     )
     @exception_handler
     async def create(self, request: Request, body: ProjectDashboardInfo.Create):
@@ -97,7 +97,7 @@ class ProjectDashboard(BaseAPI):
             return proxy_service.dispatch_api(params)
 
     @router.post(
-        's/list_versions'
+        '/list_versions'
     )
     @exception_handler
     async def list_versions(self, request: Request, body: ProjectDashboardVersionInfo.ListVersions):
@@ -119,7 +119,7 @@ class ProjectDashboard(BaseAPI):
             return proxy_service.dispatch_api(params)
 
     @router.post(
-        's/stat'
+        '/stat'
     )
     @exception_handler
     async def stat(self, request: Request, body: Stat):

@@ -20,7 +20,7 @@ class DomainDashboard(BaseAPI):
     service = 'console-api'
 
     @router.post(
-        's/create',
+        '/create',
         description=DomainDashboardInfo.Create.description(),
         responses=DomainDashboardInfo.Create.response()
     )
@@ -103,7 +103,7 @@ class DomainDashboard(BaseAPI):
             return proxy_service.dispatch_api(params)
 
     @router.post(
-        's/list_versions',
+        '/list_versions',
         description=DomainDashboardVersionInfo.ListVersions.description(),
         responses=DomainDashboardVersionInfo.ListVersions.response()
     )
@@ -127,7 +127,7 @@ class DomainDashboard(BaseAPI):
             return proxy_service.dispatch_api(params)
 
     @router.post(
-        's/stat',
+        '/stat',
         description=Stat.description(),
         responses=Stat.response()
     )
