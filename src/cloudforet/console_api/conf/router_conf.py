@@ -15,5 +15,3 @@ ROUTER = [
         'tags': ['dashboard > custom-widget'],
     }
 ]
-
-# middleware
