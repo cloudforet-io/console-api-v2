@@ -20,13 +20,13 @@ with open('VERSION', 'r') as f:
     f.close()
 
 setup(
-    name='cloudforet-console-api-v2',
+    name='Cloudforet Console API v2 Service',
     version=VERSION,
     description='Cloudforet console-api-v2 service',
     long_description='',
-    url='https://www.cloudforet.dev/',
-    author='MEGAZONE CloudOne Team',
-    author_email='admin@cloudforet.dev',
+    url='https://cloudforet.io/',
+    author='Cloudforet Admin',
+    author_email='admin@cloudforet.io',
     license='Apache License 2.0',
     packages=find_packages(),
     install_requires=[
