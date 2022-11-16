@@ -1,4 +1,2 @@
 spaceone-core
 spaceone-api
-fastapi-utils
-pydantic

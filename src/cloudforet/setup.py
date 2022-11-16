@@ -31,9 +31,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'spaceone-core',
-        'spaceone-api',
-        'pydantic',
-        'fastapi-utils'
+        'spaceone-api'
     ],
     zip_safe=False,
 )
