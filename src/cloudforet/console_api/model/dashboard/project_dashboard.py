@@ -3,19 +3,19 @@ from typing import List, Dict, Union, Any
 from datetime import datetime
 from enum import Enum
 
-
-class Scope(str, Enum):
-    domain = 'DOMAIN'
-    user = 'USER'
-
 # Base Model
+
+
+class Viewers(str, Enum):
+    public = 'PUBLIC'
+    private = 'PRIVATE'
 
 
 class ProjectDashboard(BaseModel):
     project_dashboard_id: Union[str, None] = Field(None)
     project_id: Union[str, None] = Field(None)
     name: Union[str, None] = Field(None)
-    scope: Union[Scope, None] = Field(None)
+    viewers: Union[Viewers, None] = Field(None)
     version: Union[int, None] = Field(None)
     layouts: Union[List[Dict], None] = Field(None)
     dashboard_options_schema: Union[dict, None] = Field(None)
@@ -50,6 +50,7 @@ class ProjectDashboardInfo(ProjectDashboard):
     class Create(BaseModel):
         project_id: str = Field(...)
         name: str = Field(...)
+        viewers: Viewers = Field(...)
         layout: Union[List[dict], None] = Field(None)
         dashboard_options: Union[dict, None] = Field(None)
         settings: Union[dict, None] = Field(None)
@@ -61,7 +62,7 @@ class ProjectDashboardInfo(ProjectDashboard):
 
     class Update(BaseModel):
         project_dashboard_id: str = Field(...)
-        name: Union[str, None] = Field(...)
+        name: Union[str, None] = Field(None)
         layout: Union[List[dict], None] = Field(None)
         dashboard_options: Union[dict, None] = Field(None)
         settings: Union[dict, None] = Field(None)
@@ -83,7 +84,7 @@ class ProjectDashboardInfo(ProjectDashboard):
         project_dashboard_id: Union[str, None] = Field(None)
         project_id: Union[str, None] = Field(None)
         name: Union[str, None] = Field(None)
-        scope: Union[Scope, None] = Field(None)
+        viewers: Union[Viewers, None] = Field(None)
         user_id: Union[str, None] = Field(None)
         query: Union[dict, None] = Field(None)
         domain_id: str = Field(...)

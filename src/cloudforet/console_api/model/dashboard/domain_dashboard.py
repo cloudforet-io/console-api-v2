@@ -7,15 +7,15 @@ from enum import Enum
 # Base Model
 
 
-class Scope(str, Enum):
-    domain = 'DOMAIN'
-    user = 'USER'
+class Viewers(str, Enum):
+    public = 'PUBLIC'
+    private = 'PRIVATE'
 
 
 class DomainDashboard(BaseModel):
     domain_dashboard_id: Union[str, None] = Field(None)
     name: Union[str, None] = Field(None)
-    scope: Union[Scope, None] = Field(None)
+    viewers: Union[Viewers, None] = Field(None)
     version: Union[int, None] = Field(None)
     layouts: Union[List[dict], None] = Field(None)
     dashboard_options: Union[dict, None] = Field(None)
@@ -52,7 +52,8 @@ class StatInfo(BaseModel):
 class DomainDashboardInfo(DomainDashboard):
     class Create(BaseModel):
         name: str = Field(...)
-        layouts: Union[List[dict], None] = Field(...)
+        viewers: Viewers = Field(...)
+        layouts: Union[List[dict], None] = Field(None)
         dashboard_options: Union[dict, None] = Field(None)
         settings: Union[dict, None] = Field(None)
         dashboard_options_schema: Union[dict, None] = Field(None)
@@ -68,8 +69,11 @@ class DomainDashboardInfo(DomainDashboard):
 ## name
 - required
 
-## user_id
-- if `scope` value has a `USER`, user_id required
+## viewers
+- required
+
+## domain_id
+- required
                 """
             return desc
 
@@ -78,9 +82,6 @@ class DomainDashboardInfo(DomainDashboard):
             responses_example = {
                 "200": {
                     "model": DomainDashboardInfo
-                },
-                "422": {
-                    "description": "Error Response",
                 }
             }
             return responses_example
@@ -162,10 +163,10 @@ class DomainDashboardInfo(DomainDashboard):
     class List(BaseModel):
         domain_dashboard_id: Union[str, None] = Field(None)
         name: Union[str, None] = Field(None)
-        scope: Union[Scope, None] = Field(None)
+        viewers: Union[Viewers, None] = Field(None)
         user_id: Union[str, None] = Field(None)
         query: Union[dict, None] = Field(None)
-        domain_id: str = Field(None)
+        domain_id: str = Field(...)
 
         @staticmethod
         def description():
@@ -191,7 +192,6 @@ class DomainDashboardVersionInfo(DomainDashboardVersion):
     class DeleteVersion(BaseModel):
         domain_dashboard_id: str = Field(...)
         version: int = Field(...)
-        only: Union[List[str], None] = Field(None)
         domain_id: str = Field(...)
 
         @staticmethod
