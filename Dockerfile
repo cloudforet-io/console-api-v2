@@ -27,4 +27,4 @@ RUN python3 setup.py install && \
 EXPOSE ${SPACEONE_PORT}
 
 ENTRYPOINT ["spaceone"]
-CMD ["rest", "cloudforet.console_api", "-m", "/opt"]
+CMD ["rest", "cloudforet.console_api_v2", "-m", "/opt"]

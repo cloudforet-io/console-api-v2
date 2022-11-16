@@ -1,6 +1,6 @@
 import logging
 from spaceone.core.service import *
-from cloudforet.console_api.manager.cloudforet_manager import CloudforetManager
+from cloudforet.console_api_v2.manager.cloudforet_manager import CloudforetManager
 
 _LOGGER = logging.getLogger(__name__)
 
