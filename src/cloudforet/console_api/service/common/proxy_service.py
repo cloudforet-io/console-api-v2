@@ -17,4 +17,4 @@ class ProxyService(BaseService):
     def dispatch_api(self, params):
         grpc_method = params['grpc_method']
         del params['grpc_method']
-        return self.cf_mgr.dispatch_api(grpc_method, {})
+        return self.cf_mgr.dispatch_api(grpc_method, params)

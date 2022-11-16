@@ -108,7 +108,7 @@ class ProjectDashboard(BaseAPI):
             return proxy_service.dispatch_api(params)
 
     @router.post(
-        's/list'
+        '/list'
     )
     @exception_handler
     async def list(self, request: Request, body: ProjectDashboardInfo.List):

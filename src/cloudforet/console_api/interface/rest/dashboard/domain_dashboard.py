@@ -115,7 +115,7 @@ class DomainDashboard(BaseAPI):
             return proxy_service.dispatch_api(params)
 
     @router.post(
-        's/list',
+        '/list',
         description=DomainDashboardInfo.List.description(),
         responses=DomainDashboardInfo.List.response()
     )
