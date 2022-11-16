@@ -2,7 +2,7 @@ import logging
 
 from spaceone.core.connector.space_connector import SpaceConnector
 from spaceone.core.manager import BaseManager
-from cloudforet.console_api.error import *
+from cloudforet.console_api_v2.error import *
 
 _LOGGER = logging.getLogger(__name__)
 

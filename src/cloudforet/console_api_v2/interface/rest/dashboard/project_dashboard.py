@@ -3,9 +3,10 @@ from fastapi import Request, Depends
 from fastapi_utils.inferring_router import InferringRouter
 from fastapi_utils.cbv import cbv
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+
 from spaceone.core.fastapi.api import BaseAPI, exception_handler
-from cloudforet.console_api.model.dashboard.domain_dashboard import *
-from cloudforet.console_api.service.common.proxy_service import ProxyService
+from cloudforet.console_api_v2.model.dashboard.project_dashboard import *
+from cloudforet.console_api_v2.service.common.proxy_service import ProxyService
 
 _LOGGER = logging.getLogger(__name__)
 _AUTH_SCHEME = HTTPBearer()
@@ -14,126 +15,117 @@ router = InferringRouter()
 
 
 @cbv(router)
-class DomainDashboard(BaseAPI):
-
+class ProjectDashboard(BaseAPI):
     token: HTTPAuthorizationCredentials = Depends(_AUTH_SCHEME)
     service = 'console-api'
 
     @router.post(
         '/create',
-        description=DomainDashboardInfo.Create.description(),
-        responses=DomainDashboardInfo.Create.response()
     )
     @exception_handler
-    async def create(self, request: Request, body: DomainDashboardInfo.Create):
+    async def create(self, request: Request, body: ProjectDashboardInfo.Create):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
-            params['grpc_method'] = 'dashboard.DomainDashboard.create'
+            params['grpc_method'] = 'dashboard.ProjectDashboard.create'
             return proxy_service.dispatch_api(params)
 
     @router.post(
-        '/update',
-        description=DomainDashboardInfo.Update.description(),
-        responses=DomainDashboardInfo.Update.response(),
+        '/update'
     )
     @exception_handler
-    async def update(self, request: Request, body: DomainDashboardInfo.Update):
+    async def update(self, request: Request, body: ProjectDashboardInfo.Update):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
-            params['grpc_method'] = 'dashboard.DomainDashboard.update'
+            params['grpc_method'] = 'dashboard.ProjectDashboard.update'
             return proxy_service.dispatch_api(params)
 
     @router.post(
-        '/delete',
-        description=DomainDashboardInfo.Delete.description()
+        '/delete'
     )
-    async def delete(self, request: Request, body: DomainDashboardInfo.Delete):
+    @exception_handler
+    async def delete(self, request: Request, body: ProjectDashboardInfo.Delete):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
-            params['grpc_method'] = 'dashboard.DomainDashboard.delete'
+            params['grpc_method'] = 'dashboard.ProjectDashboard.delete'
             return proxy_service.dispatch_api(params)
 
     @router.post(
-        '/get',
-        description=DomainDashboardInfo.Get.description(),
-        responses=DomainDashboardInfo.Get.response()
+        '/get'
     )
-    async def get(self, request: Request, body: DomainDashboardInfo.Get):
+    @exception_handler
+    async def get(self, request: Request, body: ProjectDashboardInfo.Get):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
-            params['grpc_method'] = 'dashboard.DomainDashboard.get'
+            params['grpc_method'] = 'dashboard.ProjectDashboard.get'
             return proxy_service.dispatch_api(params)
 
     @router.post(
-        '/delete_version',
+        '/delete_version'
     )
-    async def delete_version(self, request: Request, body: DomainDashboardVersionInfo.DeleteVersion):
+    @exception_handler
+    async def delete_version(self, request: Request, body: ProjectDashboardVersionInfo.DeleteVersion):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
-            params['grpc_method'] = 'dashboard.DomainDashboard.delete_version'
+            params['grpc_method'] = 'dashboard.ProjectDashboard.delete_version'
             return proxy_service.dispatch_api(params)
 
     @router.post(
-        '/revert_version',
-        description=DomainDashboardVersionInfo.RevertVersion.description(),
-        responses=DomainDashboardVersionInfo.RevertVersion.response()
+        '/revert_version'
     )
-    async def revert_version(self, request: Request, body: DomainDashboardVersionInfo.RevertVersion):
+    @exception_handler
+    async def revert_version(self, request: Request, body: ProjectDashboardVersionInfo.RevertVersion):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
-            params['grpc_method'] = 'dashboard.DomainDashboard.revert_version'
+            params['grpc_method'] = 'dashboard.ProjectDashboard.revert_version'
             return proxy_service.dispatch_api(params)
 
     @router.post(
-        '/get_version',
-        description=DomainDashboardVersionInfo.GetVersion.description(),
-        responses=DomainDashboardVersionInfo.GetVersion.response()
+        '/get_version'
     )
-    async def get_version(self, request: Request, body: DomainDashboardVersionInfo.GetVersion):
+    @exception_handler
+    async def get_version(self, request: Request, body: ProjectDashboardVersionInfo.RevertVersion):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
-            params['grpc_method'] = 'dashboard.DomainDashboard.get_version'
+            params['grpc_method'] = 'dashboard.ProjectDashboard.get_version'
             return proxy_service.dispatch_api(params)
 
     @router.post(
-        '/list_versions',
-        description=DomainDashboardVersionInfo.ListVersions.description(),
-        responses=DomainDashboardVersionInfo.ListVersions.response()
+        '/list_versions'
     )
-    async def list_versions(self, request: Request, body: DomainDashboardVersionInfo.ListVersions):
+    @exception_handler
+    async def list_versions(self, request: Request, body: ProjectDashboardVersionInfo.ListVersions):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
-            params['grpc_method'] = 'dashboard.DomainDashboard.list_versions'
+            params['grpc_method'] = 'dashboard.ProjectDashboard.list_versions'
             return proxy_service.dispatch_api(params)
 
     @router.post(
-        '/list',
-        description=DomainDashboardInfo.List.description(),
-        responses=DomainDashboardInfo.List.response()
+        '/list'
     )
-    async def list(self, request: Request, body: DomainDashboardInfo.List):
+    @exception_handler
+    async def list(self, request: Request, body: ProjectDashboardInfo.List):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
-            params['grpc_method'] = 'dashboard.DomainDashboard.list'
+            params['grpc_method'] = 'dashboard.ProjectDashboard.list'
             return proxy_service.dispatch_api(params)
 
     @router.post(
-        '/stat',
-        description=Stat.description(),
-        responses=Stat.response()
+        '/stat'
     )
+    @exception_handler
     async def stat(self, request: Request, body: Stat):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
-            params['grpc_method'] = 'dashboard.DomainDashboard.stat'
+            params['grpc_method'] = 'dashboard.ProjectDashboard.stat'
             return proxy_service.dispatch_api(params)
+

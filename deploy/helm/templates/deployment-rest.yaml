@@ -30,7 +30,7 @@ spec:
         - name: {{ .Values.name }}-fastapi
           image: {{ .Values.image.name }}:{{ .Values.image.version }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
-          command: ['spaceone', 'rest', 'spaceone.{{ regexReplaceAll "-" .Values.name "_" }}', '-p', '8000']
+          command: ['spaceone', 'rest', 'cloudforet.{{ regexReplaceAll "-" .Values.name "_" }}', '-p', '8000']
           ports:
             - containerPort: 8000
           volumeMounts:
