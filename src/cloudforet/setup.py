@@ -20,9 +20,9 @@ with open('VERSION', 'r') as f:
     f.close()
 
 setup(
-    name='Cloudforet Console API v2 Service',
+    name='cloudforet-console-api-v2',
     version=VERSION,
-    description='Cloudforet console-api-v2 service',
+    description='Cloudforet Console API v2 Service',
     long_description='',
     url='https://cloudforet.io/',
     author='Cloudforet Admin',
