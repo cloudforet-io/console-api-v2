@@ -1,10 +1,16 @@
-UVICORN_OPTIONS = {
-    'access_log': False
-}
-
 TITLE = 'Console API for Cloudforet'
 DESCRIPTION = ''
 
+UVICORN_OPTIONS = {}
+
+LOG = {
+    'loggers': {
+        'cloudforet': {
+            'level': 'DEBUG',
+            'handlers': ['console']
+        }
+    }
+}
 
 CONNECTORS = {
     'SpaceConnector': {
