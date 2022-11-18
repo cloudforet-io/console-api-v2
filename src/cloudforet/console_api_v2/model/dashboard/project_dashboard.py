@@ -57,7 +57,6 @@ class ProjectDashboardInfo(ProjectDashboard):
         dashboard_options_schema: Union[dict, None] = Field(None)
         labels: Union[List[str], None] = Field(None)
         tags: Union[dict, None] = Field(None)
-        userid: Union[str, None] = Field(None)
         domain_id: str = Field(...)
 
     class Update(BaseModel):
