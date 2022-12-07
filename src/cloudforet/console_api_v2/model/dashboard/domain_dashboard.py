@@ -59,7 +59,7 @@ class DomainDashboardInfo(DomainDashboard):
         dashboard_options_schema: Union[dict, None] = Field(None)
         labels: Union[List[str], None] = Field(None)
         tags: Union[dict, None] = Field(None)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
         @staticmethod
         def description():
@@ -94,7 +94,7 @@ class DomainDashboardInfo(DomainDashboard):
         dashboard_options_schema: Union[dict, None] = Field(None)
         labels: Union[dict, None] = Field(None)
         tags: Union[dict, None] = Field(None)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
         @staticmethod
         def description():
@@ -119,7 +119,7 @@ class DomainDashboardInfo(DomainDashboard):
 
     class Delete(BaseModel):
         domain_dashboard_id: str = Field(...)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
         @staticmethod
         def description():
@@ -136,7 +136,7 @@ class DomainDashboardInfo(DomainDashboard):
     class Get(BaseModel):
         domain_dashboard_id: str = Field(...)
         only: Union[List[str], None] = Field(None)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
         @staticmethod
         def description():
@@ -165,7 +165,7 @@ class DomainDashboardInfo(DomainDashboard):
         viewers: Union[Viewers, None] = Field(None)
         user_id: Union[str, None] = Field(None)
         query: Union[dict, None] = Field(None)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
         @staticmethod
         def description():
@@ -191,7 +191,7 @@ class DomainDashboardVersionInfo(DomainDashboardVersion):
     class DeleteVersion(BaseModel):
         domain_dashboard_id: str = Field(...)
         version: int = Field(...)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
         @staticmethod
         def description():
@@ -211,7 +211,7 @@ class DomainDashboardVersionInfo(DomainDashboardVersion):
     class RevertVersion(BaseModel):
         domain_dashboard_id: str = Field(...)
         version: int = Field(...)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
         @staticmethod
         def description():
@@ -241,7 +241,7 @@ class DomainDashboardVersionInfo(DomainDashboardVersion):
         domain_dashboard_id: str = Field(...)
         version: int = Field(...)
         only: Union[List[str], None] = Field(None)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
         @staticmethod
         def description():
@@ -271,7 +271,7 @@ class DomainDashboardVersionInfo(DomainDashboardVersion):
         domain_dashboard_id: str = Field(...)
         version: Union[List[int], None] = Field(None)
         query: Union[dict, None] = Field(None)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
         @staticmethod
         def description():
@@ -297,7 +297,7 @@ class DomainDashboardVersionInfo(DomainDashboardVersion):
 
 class Stat(BaseModel):
     query: dict = Field(...)
-    domain_id: str = Field(...)
+    domain_id: str = Field(None)
 
     @staticmethod
     def description():
