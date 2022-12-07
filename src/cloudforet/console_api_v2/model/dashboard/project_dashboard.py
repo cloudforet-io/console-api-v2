@@ -57,7 +57,7 @@ class ProjectDashboardInfo(ProjectDashboard):
         dashboard_options_schema: Union[dict, None] = Field(None)
         labels: Union[List[str], None] = Field(None)
         tags: Union[dict, None] = Field(None)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
     class Update(BaseModel):
         project_dashboard_id: str = Field(...)
@@ -68,16 +68,16 @@ class ProjectDashboardInfo(ProjectDashboard):
         dashboard_options_schema: Union[dict, None] = Field(None)
         labels: Union[List[str], None] = Field(None)
         tags: Union[dict, None] = Field(None)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
     class Delete(BaseModel):
         project_dashboard_id: str = Field(...)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
     class Get(BaseModel):
         project_dashboard_id: str = Field(...)
         only: Union[List[str], None] = Field(None)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
     class List(BaseModel):
         project_dashboard_id: Union[str, None] = Field(None)
@@ -86,35 +86,35 @@ class ProjectDashboardInfo(ProjectDashboard):
         viewers: Union[Viewers, None] = Field(None)
         user_id: Union[str, None] = Field(None)
         query: Union[dict, None] = Field(None)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
 
 class ProjectDashboardVersionInfo(ProjectDashboardVersion):
     class DeleteVersion(BaseModel):
         project_dashboard_id: str = Field(...)
         version: int = Field(...)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
     class RevertVersion(BaseModel):
         project_dashboard_id: str = Field(...)
         version: int = Field(...)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
     class GetVersion(BaseModel):
         project_dashboard_id: str = Field(...)
         version: int = Field(...)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
     class ListVersions(BaseModel):
         project_dashboard_id: str = Field(...)
         version: Union[int, None] = Field(None)
         query: Union[dict, None] = Field(None)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
 
 class Stat(BaseModel):
     query: dict = Field(...)
-    domain_id: str = Field(...)
+    domain_id: str = Field(None)
 
     @staticmethod
     def description():

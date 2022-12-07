@@ -6,6 +6,7 @@ from datetime import datetime
 # Base Model
 
 class CustomWidget(BaseModel):
+    custom_widget_id: Union[str, None] = Field(None)
     widget_name: Union[str, None] = Field(None)
     title: Union[str, None] = Field(None)
     widget_options: Union[dict, None] = Field(None)
@@ -32,7 +33,7 @@ class CustomWidgetInfo(CustomWidget):
         inherit_options: Union[dict, None] = Field(None)
         labels: Union[List[str], None] = Field(None)
         tags: Union[dict, None] = Field(None)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
     class Update(BaseModel):
         custom_widget_id: str = Field(...)
@@ -41,16 +42,16 @@ class CustomWidgetInfo(CustomWidget):
         inherit_options: Union[dict, None] = Field(None)
         labels: Union[List[str], None] = Field(None)
         tags: Union[dict, None] = Field(None)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
     class Delete(BaseModel):
         custom_widget_id: str = Field(...)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
     class Get(BaseModel):
         custom_widget_id: str = Field(...)
         only: Union[List[str], None] = Field(None)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
     class List(BaseModel):
         custom_widget_id: Union[str, None] = Field(None)
@@ -58,12 +59,12 @@ class CustomWidgetInfo(CustomWidget):
         title: Union[str, None] = Field(None)
         user_id: Union[str, None] = Field(None)
         query: Union[dict, None] = Field(None)
-        domain_id: str = Field(...)
+        domain_id: str = Field(None)
 
 
 class Stat(BaseModel):
     query: dict = Field(...)
-    domain_id: str = Field(...)
+    domain_id: str = Field(None)
 
     @staticmethod
     def description():
