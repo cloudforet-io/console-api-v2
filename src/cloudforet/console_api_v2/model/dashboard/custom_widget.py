@@ -9,7 +9,7 @@ class CustomWidget(BaseModel):
     custom_widget_id: Union[str, None] = Field(None)
     widget_name: Union[str, None] = Field(None)
     title: Union[str, None] = Field(None)
-    widget_options: Union[dict, None] = Field(None)
+    options: Union[dict, None] = Field(None)
     inherit_options: Union[dict, None] = Field(None)
     labels: Union[List[str], None] = Field(None)
     tags: Union[dict, None] = Field(None)
@@ -29,7 +29,7 @@ class CustomWidgetInfo(CustomWidget):
     class Create(BaseModel):
         widget_name: str = Field(...)
         title: str = Field(...)
-        widget_options: dict = Field(...)
+        options: dict = Field(...)
         inherit_options: Union[dict, None] = Field(None)
         labels: Union[List[str], None] = Field(None)
         tags: Union[dict, None] = Field(None)
@@ -38,7 +38,7 @@ class CustomWidgetInfo(CustomWidget):
     class Update(BaseModel):
         custom_widget_id: str = Field(...)
         title: Union[str, None] = Field(None)
-        widget_options: Union[dict, None] = Field(None)
+        options: Union[dict, None] = Field(None)
         inherit_options: Union[dict, None] = Field(None)
         labels: Union[List[str], None] = Field(None)
         tags: Union[dict, None] = Field(None)
