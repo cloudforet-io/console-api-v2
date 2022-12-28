@@ -17,7 +17,7 @@ class ProjectDashboard(BaseModel):
     name: Union[str, None] = Field(None)
     viewers: Union[Viewers, None] = Field(None)
     version: Union[int, None] = Field(None)
-    layouts: Union[List[Dict], None] = Field(None)
+    layouts: Union[List[Any], None] = Field(None)
     variables_schema: Union[dict, None] = Field(None)
     settings: Union[dict, None] = Field(None)
     labels: Union[List[str], None] = Field(None)
@@ -31,7 +31,7 @@ class ProjectDashboard(BaseModel):
 class ProjectDashboardVersion(BaseModel):
     project_dashboard_id: Union[str, None] = Field(None)
     version: Union[int, None] = Field(None)
-    layouts: Union[List[dict], None] = Field(None)
+    layouts: Union[List[Any], None] = Field(None)
     variables: Union[dict, None] = Field(None)
     settings: Union[dict, None] = Field(None)
     variables_schema: Union[dict, None] = Field(None)
