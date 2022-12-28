@@ -1,5 +1,5 @@
 import logging
-from fastapi import Request, Depends
+from fastapi import Request, Depends, Body
 from fastapi_utils.inferring_router import InferringRouter
 from fastapi_utils.cbv import cbv
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
@@ -19,7 +19,7 @@ class NotificationUsage(BaseAPI):
 
     @router.post('/list')
     @exception_handler
-    async def list(self, request: Request):
+    async def list(self, request: Request, body: dict = Body()):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
@@ -28,7 +28,7 @@ class NotificationUsage(BaseAPI):
 
     @router.post('/stat')
     @exception_handler
-    async def stat(self, request: Request):
+    async def stat(self, request: Request, body: dict = Body()):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:

@@ -1,5 +1,5 @@
 import logging
-from fastapi import Request, Depends
+from fastapi import Request, Depends, Body
 from fastapi_utils.inferring_router import InferringRouter
 from fastapi_utils.cbv import cbv
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
@@ -37,7 +37,7 @@ class UserChannel(BaseAPI):
 
     @router.post('/set-schedule')
     @exception_handler
-    async def set_schedule(self, request: Request):
+    async def set_schedule(self, request: Request, body: dict = Body()):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
@@ -46,7 +46,7 @@ class UserChannel(BaseAPI):
 
     @router.post('/set-subscription')
     @exception_handler
-    async def set_subscription(self, request: Request):
+    async def set_subscription(self, request: Request, body: dict = Body()):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
@@ -55,7 +55,7 @@ class UserChannel(BaseAPI):
 
     @router.post('/enable')
     @exception_handler
-    async def enable(self, request: Request):
+    async def enable(self, request: Request, body: dict = Body()):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
@@ -64,7 +64,7 @@ class UserChannel(BaseAPI):
 
     @router.post('/disable')
     @exception_handler
-    async def disable(self, request: Request):
+    async def disable(self, request: Request, body: dict = Body()):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
@@ -73,7 +73,7 @@ class UserChannel(BaseAPI):
 
     @router.post('/delete')
     @exception_handler
-    async def delete(self, request: Request):
+    async def delete(self, request: Request, body: dict = Body()):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
@@ -82,7 +82,7 @@ class UserChannel(BaseAPI):
 
     @router.post('/get')
     @exception_handler
-    async def get(self, request: Request):
+    async def get(self, request: Request, body: dict = Body()):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
@@ -91,7 +91,7 @@ class UserChannel(BaseAPI):
 
     @router.post('/list')
     @exception_handler
-    async def list(self, request: Request):
+    async def list(self, request: Request, body: dict = Body()):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
@@ -100,7 +100,7 @@ class UserChannel(BaseAPI):
 
     @router.post('/stat')
     @exception_handler
-    async def stat(self, request: Request):
+    async def stat(self, request: Request, body: dict = Body()):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:

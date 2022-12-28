@@ -155,6 +155,16 @@ ROUTER = [
         'tags': ['notification > protocol']
     },
     {
+        'path': 'cloudforet.console_api_v2.interface.rest.notification.quota:router',
+        'prefix': '/notification/quota',
+        'tags': ['notification > quota']
+    },
+    {
+        'path': 'cloudforet.console_api_v2.interface.rest.notification.notification_usage:router',
+        'prefix': '/notification/notification-usage',
+        'tags': ['notification > notification-usage']
+    },
+    {
         'path': 'cloudforet.console_api_v2.interface.rest.notification.project_channel:router',
         'prefix': '/notification/project-channel',
         'tags': ['notification > project-channel']
