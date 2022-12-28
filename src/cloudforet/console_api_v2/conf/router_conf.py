@@ -150,6 +150,36 @@ ROUTER = [
         'tags': ['repository > policy']
     },
     {
+        'path': 'cloudforet.console_api_v2.interface.rest.notification.protocol:router',
+        'prefix': '/notification/protocol',
+        'tags': ['notification > protocol']
+    },
+    {
+        'path': 'cloudforet.console_api_v2.interface.rest.notification.quota:router',
+        'prefix': '/notification/quota',
+        'tags': ['notification > quota']
+    },
+    {
+        'path': 'cloudforet.console_api_v2.interface.rest.notification.notification_usage:router',
+        'prefix': '/notification/notification-usage',
+        'tags': ['notification > notification-usage']
+    },
+    {
+        'path': 'cloudforet.console_api_v2.interface.rest.notification.project_channel:router',
+        'prefix': '/notification/project-channel',
+        'tags': ['notification > project-channel']
+    },
+    {
+        'path': 'cloudforet.console_api_v2.interface.rest.notification.user_channel:router',
+        'prefix': '/notification/user-channel',
+        'tags': ['notification > user-channel']
+    },
+    {
+        'path': 'cloudforet.console_api_v2.interface.rest.notification.notification:router',
+        'prefix': '/notification/notification',
+        'tags': ['notification > notification']
+    },
+    {
         'path': 'cloudforet.console_api_v2.interface.rest.cost_analysis.data_source:router',
         'prefix': '/cost-analysis/data-source',
         'tags': ['cost-analysis > data-source'],
