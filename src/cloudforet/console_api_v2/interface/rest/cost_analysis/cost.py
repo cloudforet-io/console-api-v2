@@ -55,7 +55,7 @@ class Cost(BaseAPI):
 
     @router.post('/analyze')
     @exception_handler
-    async def analyze_v2(self, request: Request, body: dict = Body(...)):
+    async def analyze(self, request: Request, body: dict = Body(...)):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
