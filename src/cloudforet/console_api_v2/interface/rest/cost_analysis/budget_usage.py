@@ -17,7 +17,6 @@ class BudgetUsage(BaseAPI):
     token: HTTPAuthorizationCredentials = Depends(_AUTH_SCHEME)
     service = 'console-api'
 
-
     @router.post('/list')
     @exception_handler
     async def list(self, request: Request, body: dict = Body(...)):
@@ -33,7 +32,7 @@ class BudgetUsage(BaseAPI):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
-            params['grpc_method'] = 'cost_analysis.BudgetUsage.analyze_v2'
+            params['grpc_method'] = 'cost_analysis.BudgetUsage.analyze'
             return proxy_service.dispatch_api(params)
 
     @router.post('/stat')
