@@ -1,13 +1,11 @@
 import logging
-from fastapi import Request, Depends, Body
+from fastapi import Request, Body
 from fastapi_utils.inferring_router import InferringRouter
 from fastapi_utils.cbv import cbv
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from spaceone.core.fastapi.api import BaseAPI, exception_handler
 from cloudforet.console_api_v2.service.common.proxy_service import ProxyService
 
 _LOGGER = logging.getLogger(__name__)
-_AUTH_SCHEME = HTTPBearer()
 
 router = InferringRouter()
 
