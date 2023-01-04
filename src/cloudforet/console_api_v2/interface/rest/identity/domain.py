@@ -14,14 +14,13 @@ router = InferringRouter()
 
 @cbv(router)
 class Domain(BaseAPI):
-
-    token: HTTPAuthorizationCredentials = Depends(_AUTH_SCHEME)
     service = 'console-api'
 
     @router.post('/get')
     @exception_handler
-    async def get(self, request: Request, body: dict = Body(...)):
-        params, metadata = await self.parse_request(request, self.token.credentials)
+    async def get(self, request: Request, body: dict = Body(...),
+                  token: HTTPAuthorizationCredentials = Depends(_AUTH_SCHEME)):
+        params, metadata = await self.parse_request(request, token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
             params['grpc_method'] = 'identity.Domain.get'
@@ -30,7 +29,7 @@ class Domain(BaseAPI):
     @router.post('/list')
     @exception_handler
     async def list(self, request: Request, body: dict = Body(...)):
-        params, metadata = await self.parse_request(request, self.token.credentials)
+        params, metadata = await self.parse_request(request)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
             params['grpc_method'] = 'identity.Domain.list'
@@ -38,7 +37,8 @@ class Domain(BaseAPI):
 
     @router.post('/stat')
     @exception_handler
-    async def stat(self, request: Request, body: dict = Body(...)):
+    async def stat(self, request: Request, body: dict = Body(...),
+                   token: HTTPAuthorizationCredentials = Depends(_AUTH_SCHEME)):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
