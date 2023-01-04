@@ -14,7 +14,6 @@ router = InferringRouter()
 
 @cbv(router)
 class Token(BaseAPI):
-    token: HTTPAuthorizationCredentials = Depends(_AUTH_SCHEME)
     service = 'console-api'
 
     @router.post('/issue')
