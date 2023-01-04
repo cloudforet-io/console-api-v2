@@ -94,23 +94,23 @@ class CloudService(BaseAPI):
         This api can get *Cloud Service* data collected by Collector.
         <br>
 
-        | Key                     | Description                                                | Type   | Required |
-        |-------------------------|------------------------------------------------------------|--------|----------|
-        | **cloud_service_id**    | Cloud Service id value                                     | string |          |
-        | **name**                | Name of your resource from CSP                             | string |          |
-        | **state**               | Collected state of cloud service by Cloudforet's collector | string |          |
-        | **ip_address**          | One of IP addresses the cloud service has                  | string |          |
-        | **account**             | Unique ID to identify your account from CSP                | string |          |
-        | **instance_type**       | Cloud service's Instance type                              | string |          |
-        | **cloud_service_type**  | Name of your cloud service from CSP                        | string |          |
-        | **cloud_service_group** | Parent value of *cloud_service_type* value                 | string |          |
-        | **provider**            | CSP code like aws, azure and google_cloud                  | string |          |
-        | **region_code**         | Unique region code by each CSP                             | string |          |
-        | **project_id**          | Cloudforet's project id                                    | string |          |
-        | **project_group_id**    | Cloudforet's project group id                              | string |          |
-        | **resource_group_id**   | Resource group id in Cloudforet's resources.               | string |          |
-        | **query**               | Query option for detail search                             | object |          |
-        | **domain_id**           | Unique id by each domain                                   | string |          |
+        | Key                     | Description                                                  | Type   | Required |
+        |-------------------------|--------------------------------------------------------------|--------|----------|
+        | **cloud_service_id**    | Cloud Service id value                                       | string |          |
+        | **name**                | Name of your resource from CSP                               | string |          |
+        | **state**               | Collected state of cloud service by Cloudforet's collector   | string |          |
+        | **ip_address**          | One of IP addresses the cloud service has                    | string |          |
+        | **account**             | Unique ID to identify your account from CSP                  | string |          |
+        | **instance_type**       | Cloud service's Instance type                                | string |          |
+        | **cloud_service_type**  | Type of your cloud service from CSP like Instance or Database| string |          |
+        | **cloud_service_group** | Name of your cloud service from CSP                          | string |          |
+        | **provider**            | CSP code like aws, azure and google_cloud                    | string |          |
+        | **region_code**         | Unique region code by each CSP                               | string |          |
+        | **project_id**          | Cloudforet's project id                                      | string |          |
+        | **project_group_id**    | Cloudforet's project group id                                | string |          |
+        | **resource_group_id**   | Resource group id in Cloudforet's resources.                 | string |          |
+        | **query**               | Query option for detail search                               | object |          |
+        | **domain_id**           | Unique id by each domain (extracted automatically from token)| string |          |
         """
         params, metadata = await self.parse_request(request, self.token.credentials)
 

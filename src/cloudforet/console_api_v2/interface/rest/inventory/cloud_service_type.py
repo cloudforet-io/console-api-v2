@@ -53,19 +53,19 @@ class CloudServiceType(BaseAPI):
         This api can get *Cloud Service Type* data collected by Collector.
         <br>
 
-        | Key                        | Description                                    | Type   | Required |
-        |----------------------------|------------------------------------------------|--------|----------|
-        | **cloud_service_type_id**  | cloud_service_type's id value.                 | string | *True*   |
-        | **name**                   | Name of yourcloud_service_type                     | string |          |
-        | **provider**               | CSP code like aws, azure and google_cloud      | string |          |
-        | **group**                  | Parent value of name value                     | string |          |
-        | **cloud_service_type_key** | {provider}.{group}.{name} format value         | string |          |
-        | **service_code**           | Standard for classify resources by each CSP    | string |          |
-        | **is_primary**             | Priority value to show resource within group   | string |          |
-        | **is_major**               | Priority value to show resource within group   | string |          |
-        | **resource_type**          | Standard for classify resources for Cloudforet | string |          |
-        | **query**                  | Query option for detail search                 | string |          |
-        | **domain_id**              | Unique id by each domain                       | string |          |
+        | Key                        | Description                                                   | Type    | Required |
+        |----------------------------|---------------------------------------------------------------|---------|----------|
+        | **cloud_service_type_id**  | cloud_service_type's id value.                                | string  |          |
+        | **name**                   | Type of your cloud service from CSP like Instance or Database | string  |          |
+        | **provider**               | CSP code like aws, azure and google_cloud                     | string  |          |
+        | **group**                  | Name of your cloud service from CSP                           | string  |          |
+        | **cloud_service_type_key** | {provider}.{group}.{name} format value                        | string  |          |
+        | **service_code**           | Standard for classify resources by each CSP                   | string  |          |
+        | **is_primary**             | Priority value to show resource within group                  | boolean |          |
+        | **is_major**               | Priority value to show resource within group                  | boolean |          |
+        | **resource_type**          | Standard for classify resources for Cloudforet                | string  |          |
+        | **query**                  | Query option for detail search                                | object  |          |
+        | **domain_id**              | Unique id by each domain (extracted automatically from token) | string  |          |
         """
         params, metadata = await self.parse_request(request, self.token.credentials)
 

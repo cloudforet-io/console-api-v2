@@ -88,15 +88,15 @@ class Region(BaseAPI):
         ## Description
         This api can get *Region* data collected by Collector.
         <br>
-        | Key               | Description                                   | Type    | Required|
-        |-------------------|-----------------------------------------------|---------|---------|
-        |**region_id**      | Region id value                               | string  |  |
-        |**name**           | Region name                                   | string  |  |
-        |**region_key**     | {provider}.{region_code} format value         | string  |  |
-        |**region_code**    | Unique region code by each CSP                | string  |  |
-        |**provider**       | CSP code like aws, azure and google_cloud     | string  |  |
-        |**query**          | Query option for detail search                | object  |  |
-        |**domain_id**      | Unique id by each domain                      | string  |  |
+        | Key               | Description                                                  | Type    | Required|
+        |-------------------|--------------------------------------------------------------|---------|---------|
+        |**region_id**      | Region id value                                              | string  |         |
+        |**name**           | Region name                                                  | string  |         |
+        |**region_key**     | {provider}.{region_code} format value                        | string  |         |
+        |**region_code**    | Unique region code by each CSP                               | string  |         |
+        |**provider**       | CSP code like aws, azure and google_cloud                    | string  |         |
+        |**query**          | Query option for detail search                               | object  |         |
+        |**domain_id**      | Unique id by each domain (extracted automatically from token)| string  |         |
         """
         
         params, metadata = await self.parse_request(request, self.token.credentials)
