@@ -50,7 +50,7 @@ class CloudServiceQuery(BaseAPIModel):
     cloud_service_id: Union[str, None] = Field(None)
     name: Union[str, None] = Field(None)
     state: Union[str, None] = Field(None)
-    ip_addresses: Union[list, None] = Field(None)
+    ip_address: Union[str, None] = Field(None)
     account: Union[str, None] = Field(None)
     instance_type: Union[str, None] = Field(None)
     cloud_service_type: Union[str, None] = Field(None)
