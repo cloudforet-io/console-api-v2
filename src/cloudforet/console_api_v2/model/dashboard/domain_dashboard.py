@@ -92,7 +92,7 @@ class DomainDashboardInfo(DomainDashboard):
         variables: Union[dict, None] = Field(None)
         settings: Union[dict, None] = Field(None)
         variables_schema: Union[dict, None] = Field(None)
-        labels: Union[dict, None] = Field(None)
+        labels: Union[list, None] = Field(None)
         tags: Union[dict, None] = Field(None)
         domain_id: str = Field(None)
 
