@@ -4,6 +4,7 @@ from fastapi_utils.inferring_router import InferringRouter
 from fastapi_utils.cbv import cbv
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from spaceone.core.fastapi.api import BaseAPI, exception_handler
+from cloudforet.console_api_v2.model.identity.user import *
 from cloudforet.console_api_v2.service.common.proxy_service import ProxyService
 
 _LOGGER = logging.getLogger(__name__)
@@ -18,36 +19,36 @@ class User(BaseAPI):
     token: HTTPAuthorizationCredentials = Depends(_AUTH_SCHEME)
     service = 'console-api'
 
-    @router.post('/create')
+    @router.post('/create', openapi_extra=CreateUserRequest.meta(), response_model=UserInfo)
     @exception_handler
-    async def create(self, request: Request, body: dict = Body(...)):
+    async def create(self, request: Request):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
             params['grpc_method'] = 'identity.User.create'
             return proxy_service.dispatch_api(params)
 
-    @router.post('/update')
+    @router.post('/update', openapi_extra=UpdateUserRequest.meta(), response_model=UserInfo)
     @exception_handler
-    async def update(self, request: Request, body: dict = Body(...)):
+    async def update(self, request: Request):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
             params['grpc_method'] = 'identity.User.update'
             return proxy_service.dispatch_api(params)
 
-    @router.post('/delete')
+    @router.post('/delete', openapi_extra=UserRequest.meta(), response_model=UserInfo)
     @exception_handler
-    async def delete(self, request: Request, body: dict = Body(...)):
+    async def delete(self, request: Request):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
             params['grpc_method'] = 'identity.User.delete'
             return proxy_service.dispatch_api(params)
 
-    @router.post('/set-required-actions')
+    @router.post('/set-required-actions', openapi_extra=SetRequiredActionsRequest.meta(), response_model=UserInfo)
     @exception_handler
-    async def set_required_actions(self, request: Request, body: dict = Body(...)):
+    async def set_required_actions(self, request: Request):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
@@ -63,13 +64,38 @@ class User(BaseAPI):
             params['grpc_method'] = 'identity.User.find'
             return proxy_service.dispatch_api(params)
 
-    @router.post('/sync')
+    @router.post('/sync', openapi_extra=UserQuery.meta())
     @exception_handler
-    async def sync(self, request: Request, body: dict = Body(...)):
+    async def sync(self, request: Request):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
             params['grpc_method'] = 'identity.User.sync'
+            return proxy_service.dispatch_api(params)
+
+    @router.post('/list', openapi_extra=UserQuery.meta(), response_model=UsersInfo)
+    @exception_handler
+    async def list(self, request: Request):
+        """
+        ## Description
+        This api can get *User* data created at Cloudforet console.
+
+        <br>
+        | Key           | Description                                                   | Type   | Required |
+        |---------------|---------------------------------------------------------------|--------|----------|
+        | **user_id**   | Cloudforet Console login id                                              | string |          |
+        | **name**      | Name set in Cloudforet console                                | string |          |
+        | **state**     | State of user id                                              | string |          |
+        | **email**     | Email information set in Cloudforet console                              | string |          |
+        | **user_type** | USER(default) and API_USER type exist                         | string |          |
+        | **backend**   | LOCAL(default) and EXTERANL type exist                        | string |          |
+        | **query**     | Query option for detail search                                | object |          |
+        | **domain_id** | Unique id by each domain (extracted automatically from token) | string |          |
+        """
+        params, metadata = await self.parse_request(request, self.token.credentials)
+
+        with self.locator.get_service(ProxyService, metadata) as proxy_service:
+            params['grpc_method'] = 'identity.User.list'
             return proxy_service.dispatch_api(params)
 
     @router.post('/stat')
