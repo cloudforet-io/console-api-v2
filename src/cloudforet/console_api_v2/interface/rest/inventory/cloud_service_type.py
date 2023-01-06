@@ -50,12 +50,12 @@ class CloudServiceType(BaseAPI):
     async def list(self, request: Request):
         """
         ## Description
-        This api can get *Cloud Service Type* data collected by Collector.
+        Gets a list of all CloudServiceTypes. You can use a query to get a filtered list of CloudServiceTypes.
         <br>
 
         | Key                        | Description                                                   | Type    | Required |
         |----------------------------|---------------------------------------------------------------|---------|----------|
-        | **cloud_service_type_id**  | cloud_service_type's id value.                                | string  |          |
+        | **cloud_service_type_id**  | Cloud service type id                                         | string  |          |
         | **name**                   | Type of your cloud service from CSP like Instance or Database | string  |          |
         | **provider**               | CSP code like aws, azure and google_cloud                     | string  |          |
         | **group**                  | Name of your cloud service from CSP                           | string  |          |
