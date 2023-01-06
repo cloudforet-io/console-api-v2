@@ -78,15 +78,15 @@ class User(BaseAPI):
     async def list(self, request: Request):
         """
         ## Description
-        This api can get *User* data created at Cloudforet console.
+        Get all of your users.
 
         <br>
         | Key           | Description                                                   | Type   | Required |
         |---------------|---------------------------------------------------------------|--------|----------|
-        | **user_id**   | Cloudforet Console login id                                              | string |          |
-        | **name**      | Name set in Cloudforet console                                | string |          |
+        | **user_id**   | Login id                                                      | string |          |
+        | **name**      | Name value                                                    | string |          |
         | **state**     | State of user id                                              | string |          |
-        | **email**     | Email information set in Cloudforet console                              | string |          |
+        | **email**     | Email value                                                   | string |          |
         | **user_type** | USER(default) and API_USER type exist                         | string |          |
         | **backend**   | LOCAL(default) and EXTERANL type exist                        | string |          |
         | **query**     | Query option for detail search                                | object |          |
