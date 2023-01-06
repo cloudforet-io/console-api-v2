@@ -96,7 +96,7 @@ class CloudService(BaseAPI):
         <br>
         | Key                     | Description                                                  | Type   | Required |
         |-------------------------|--------------------------------------------------------------|--------|----------|
-        | **cloud_service_id**    | Cloud Service id value                                       | string |          |
+        | **cloud_service_id**    | Cloud Service id                                             | string |          |
         | **name**                | Name of your resource from CSP                               | string |          |
         | **state**               | Collected state of cloud service by collector                | string |          |
         | **ip_address**          | One of IP addresses the cloud service has                    | string |          |
