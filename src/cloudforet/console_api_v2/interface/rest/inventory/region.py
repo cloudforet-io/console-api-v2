@@ -86,11 +86,11 @@ class Region(BaseAPI):
     async def list(self, request: Request):
         """
         ## Description
-        This api can get *Region* data collected by Collector.
+        Gets a list of all Regions. You can use a query to get a filtered list of Regions.
         <br>
         | Key               | Description                                                  | Type    | Required|
         |-------------------|--------------------------------------------------------------|---------|---------|
-        |**region_id**      | Region id value                                              | string  |         |
+        |**region_id**      | Region id                                                    | string  |         |
         |**name**           | Region name                                                  | string  |         |
         |**region_key**     | {provider}.{region_code} format value                        | string  |         |
         |**region_code**    | Unique region code by each CSP                               | string  |         |

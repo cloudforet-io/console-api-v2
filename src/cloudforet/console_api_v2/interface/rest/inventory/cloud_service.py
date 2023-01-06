@@ -91,14 +91,14 @@ class CloudService(BaseAPI):
     async def list(self, request: Request):
         """
         ## Description
-        This api can get *Cloud Service* data collected by Collector.
+        Gets a list of all CloudServices. You can use a query to get a filtered list of CloudServices.
         <br>
 
         | Key                     | Description                                                  | Type   | Required |
         |-------------------------|--------------------------------------------------------------|--------|----------|
-        | **cloud_service_id**    | Cloud Service id value                                       | string |          |
+        | **cloud_service_id**    | Cloud Service id                                             | string |          |
         | **name**                | Name of your resource from CSP                               | string |          |
-        | **state**               | Collected state of cloud service by Cloudforet's collector   | string |          |
+        | **state**               | Collected state of cloud service by collector                | string |          |
         | **ip_address**          | One of IP addresses the cloud service has                    | string |          |
         | **account**             | Unique ID to identify your account from CSP                  | string |          |
         | **instance_type**       | Cloud service's Instance type                                | string |          |
@@ -106,9 +106,9 @@ class CloudService(BaseAPI):
         | **cloud_service_group** | Name of your cloud service from CSP                          | string |          |
         | **provider**            | CSP code like aws, azure and google_cloud                    | string |          |
         | **region_code**         | Unique region code by each CSP                               | string |          |
-        | **project_id**          | Cloudforet's project id                                      | string |          |
-        | **project_group_id**    | Cloudforet's project group id                                | string |          |
-        | **resource_group_id**   | Resource group id in Cloudforet's resources.                 | string |          |
+        | **project_id**          | Project id                                                   | string |          |
+        | **project_group_id**    | Project group id                                             | string |          |
+        | **resource_group_id**   | Resource group id                                            | string |          |
         | **query**               | Query option for detail search                               | object |          |
         | **domain_id**           | Unique id by each domain (extracted automatically from token)| string |          |
         """
