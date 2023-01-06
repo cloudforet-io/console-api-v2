@@ -58,14 +58,14 @@ class Project(BaseAPI):
     async def list(self, request: Request):
         """
         ## Description
-        This api can get *Project* data created at console.
+        Get all of your projects.
 
         <br>
         | Key                  | Description                                                   | Type   | Required |
         |----------------------|---------------------------------------------------------------|--------|----------|
-        | **project_id**       | Cloudforet's project id                                       | string |          |
-        | **name**             | Cloudforet's project name                                     | string |          |
-        | **project_group_id** | Cloudforet's project group id                                 | string |          |
+        | **project_id**       | Project id                                                    | string |          |
+        | **name**             | Project name                                                  | string |          |
+        | **project_group_id** | Project group id                                              | string |          |
         | **query**            | Query option for detail search                                | object |          |
         | **domain_id**        | Unique id by each domain (extracted automatically from token) | string |          |
         """

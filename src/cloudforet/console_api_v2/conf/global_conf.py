@@ -1,5 +1,10 @@
 TITLE = 'Console API for Cloudforet'
-DESCRIPTION = ''
+DESCRIPTION = """
+You need api key for authorization. 
+
+If you want to issue api key, please read this [documentation](https://cloudforet.io/docs/guides/my-page/access-with-api-cli/) first.
+ 
+"""
 
 UVICORN_OPTIONS = {}
 
