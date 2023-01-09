@@ -3,7 +3,17 @@ DESCRIPTION = """
 You need api key for authorization. 
 
 If you want to issue api key, please read this [documentation](https://cloudforet.io/docs/guides/my-page/access-with-api-cli/) first.
- 
+
+<br>
+| Service                              | Description |
+|--------------------------------------|-------------|
+| [Identity](/identity/docs)           |             |
+| [Inventory](/inventory/docs)         |             |
+| [Notification](/notification/docs)   |             |
+| [Repository](/repository/docs)       |             |
+| [Cost-analysis](/cost-analysis/docs) |             |
+| [Dashboard](/dashboard/docs)         |             |
+
 """
 
 UVICORN_OPTIONS = {}
