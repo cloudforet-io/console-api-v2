@@ -95,11 +95,6 @@ ROUTER = [
         'tags': ['inventory > cloud-service']
     },
     {
-        'path': 'cloudforet.console_api_v2.interface.rest.inventory.cloud_service_tag:router',
-        'prefix': '/inventory/cloud-service-tag',
-        'tags': ['inventory > cloud-service-tag']
-    },
-    {
         'path': 'cloudforet.console_api_v2.interface.rest.inventory.change_history:router',
         'prefix': '/inventory/change-history',
         'tags': ['inventory > change-history']
