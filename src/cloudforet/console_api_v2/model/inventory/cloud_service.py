@@ -101,4 +101,5 @@ class CloudServiceStatQuery(BaseAPIModel):
 
 
 class CloudServiceAnalyzeQuery(BaseAPIModel):
-    pass
+    query: dict = Field(...)
+    domain_id: Union[str, None] = Field(None)
