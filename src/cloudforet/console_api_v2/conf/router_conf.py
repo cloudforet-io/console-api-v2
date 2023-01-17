@@ -144,6 +144,7 @@ ROUTER = [
         'router_options': {
             'prefix': '/inventory/collector',
             'tags': ['inventory > collector']
+        }
     },
     {
         'router_path': 'cloudforet.console_api_v2.interface.rest.inventory.job:router',
