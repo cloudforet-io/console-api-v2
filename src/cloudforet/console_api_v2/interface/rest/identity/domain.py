@@ -26,15 +26,6 @@ class Domain(BaseAPI):
             params['grpc_method'] = 'identity.Domain.get'
             return proxy_service.dispatch_api(params)
 
-    @router.post('/list')
-    @exception_handler
-    async def list(self, request: Request, body: dict = Body(...)):
-        params, metadata = await self.parse_request(request)
-
-        with self.locator.get_service(ProxyService, metadata) as proxy_service:
-            params['grpc_method'] = 'identity.Domain.list'
-            return proxy_service.dispatch_api(params)
-
     @router.post('/stat')
     @exception_handler
     async def stat(self, request: Request, body: dict = Body(...),
