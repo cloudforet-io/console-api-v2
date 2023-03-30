@@ -54,7 +54,7 @@ class RegionInfo(BaseAPIModel):
     tags: Union[dict, None] = Field(None)
     domain_id: Union[str, None] = Field(None)
     created_at: Union[datetime, None] = Field(None)
-    deleted_at: Union[datetime, None] = Field(None)
+    updated_at: Union[datetime, None] = Field(None)
 
 
 class RegionsInfo(BaseAPIModel):
