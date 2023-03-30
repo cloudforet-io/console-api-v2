@@ -37,6 +37,24 @@ class User(BaseAPI):
             params['grpc_method'] = 'identity.User.update'
             return proxy_service.dispatch_api(params)
 
+    @router.post('/verify-email', openapi_extra=UserRequest.meta(), response_model=UserInfo)
+    @exception_handler
+    async def verify_email(self, request: Request):
+        params, metadata = await self.parse_request(request, self.token.credentials)
+
+        with self.locator.get_service(ProxyService, metadata) as proxy_service:
+            params['grpc_method'] = 'identity.User.verify_email'
+            return proxy_service.dispatch_api(params)
+
+    @router.post('/confirm-email', openapi_extra=ConfirmEmailRequest.meta())
+    @exception_handler
+    async def confirm_email(self, request: Request):
+        params, metadata = await self.parse_request(request, self.token.credentials)
+
+        with self.locator.get_service(ProxyService, metadata) as proxy_service:
+            params['grpc_method'] = 'identity.User.confirm_email'
+            return proxy_service.dispatch_api(params)
+
     @router.post('/delete', openapi_extra=UserRequest.meta(), response_model=UserInfo)
     @exception_handler
     async def delete(self, request: Request):

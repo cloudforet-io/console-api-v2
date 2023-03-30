@@ -49,12 +49,11 @@ class RegionInfo(BaseAPIModel):
     region_id: Union[str, None] = Field(None)
     name: Union[str, None] = Field(None)
     region_key: Union[str, None] = Field(None)
-    region_code: Union[list, None] = Field(None)
+    region_code: Union[str, None] = Field(None)
     provider: Union[str, None] = Field(None)
     tags: Union[dict, None] = Field(None)
     domain_id: Union[str, None] = Field(None)
     created_at: Union[datetime, None] = Field(None)
-    updated_at: Union[datetime, None] = Field(None)
     deleted_at: Union[datetime, None] = Field(None)
 
 
