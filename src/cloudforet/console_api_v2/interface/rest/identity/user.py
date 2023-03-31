@@ -37,7 +37,7 @@ class User(BaseAPI):
             params['grpc_method'] = 'identity.User.update'
             return proxy_service.dispatch_api(params)
 
-    @router.post('/verify-email', openapi_extra=UserRequest.meta(), response_model=UserInfo)
+    @router.post('/verify-email', openapi_extra=VerifyEmailRequest.meta())
     @exception_handler
     async def verify_email(self, request: Request):
         params, metadata = await self.parse_request(request, self.token.credentials)
@@ -46,13 +46,22 @@ class User(BaseAPI):
             params['grpc_method'] = 'identity.User.verify_email'
             return proxy_service.dispatch_api(params)
 
-    @router.post('/confirm-email', openapi_extra=ConfirmEmailRequest.meta())
+    @router.post('/confirm-email', openapi_extra=ConfirmEmailRequest.meta(), response_model=UserInfo)
     @exception_handler
     async def confirm_email(self, request: Request):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
             params['grpc_method'] = 'identity.User.confirm_email'
+            return proxy_service.dispatch_api(params)
+
+    @router.post('/reset-password', openapi_extra=UserRequest.meta())
+    @exception_handler
+    async def reset_password(self, request: Request):
+        params, metadata = await self.parse_request(request, self.token.credentials)
+
+        with self.locator.get_service(ProxyService, metadata) as proxy_service:
+            params['grpc_method'] = 'identity.User.reset_password'
             return proxy_service.dispatch_api(params)
 
     @router.post('/delete', openapi_extra=UserRequest.meta(), response_model=UserInfo)
