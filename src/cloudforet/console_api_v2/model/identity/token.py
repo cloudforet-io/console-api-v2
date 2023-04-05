@@ -9,6 +9,7 @@ class IssueTokenRequest(BaseAPIModel):
     credentials: dict = Field(...)
     time_out: Union[int, None] = Field(None)
     refresh_count: Union[str, None] = Field(None)
+    verify_code: Union[str, None] = Field(None)
     domain_id: Union[str, None] = Field(None)
 
 
