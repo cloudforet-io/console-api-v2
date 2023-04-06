@@ -55,15 +55,6 @@ class User(BaseAPI):
             params['grpc_method'] = 'identity.User.confirm_email'
             return proxy_service.dispatch_api(params)
 
-    @router.post('/reset-password', openapi_extra=UserRequest.meta())
-    @exception_handler
-    async def reset_password(self, request: Request):
-        params, metadata = await self.parse_request(request, self.token.credentials)
-
-        with self.locator.get_service(ProxyService, metadata) as proxy_service:
-            params['grpc_method'] = 'identity.User.reset_password'
-            return proxy_service.dispatch_api(params)
-
     @router.post('/delete', openapi_extra=UserRequest.meta(), response_model=UserInfo)
     @exception_handler
     async def delete(self, request: Request):
@@ -132,4 +123,19 @@ class User(BaseAPI):
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
             params['grpc_method'] = 'identity.User.stat'
+            return proxy_service.dispatch_api(params)
+
+
+@cbv(router)
+class NotAuthenticatedUser(BaseAPI):
+
+    service = 'console-api'
+
+    @router.post('/reset-password', openapi_extra=UserRequest.meta())
+    @exception_handler
+    async def reset_password(self, request: Request):
+        params, metadata = await self.parse_request(request, token=None)
+
+        with self.locator.get_service(ProxyService, metadata) as proxy_service:
+            params['grpc_method'] = 'identity.User.reset_password'
             return proxy_service.dispatch_api(params)
