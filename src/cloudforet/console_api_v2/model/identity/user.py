@@ -23,6 +23,7 @@ class UpdateUserRequest(BaseAPIModel):
     password: Union[str, None] = Field(None)
     name: Union[str, None] = Field(None)
     email: Union[str, None] = Field(None)
+    reset_password: Union[bool, None] = Field(None)
     language: Union[str, None] = Field(None)
     timezone: Union[str, None] = Field(None)
     tags: Union[dict, None] = Field(None)
