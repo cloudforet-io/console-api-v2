@@ -55,7 +55,7 @@ class User(BaseAPI):
             params['grpc_method'] = 'identity.User.confirm_email'
             return proxy_service.dispatch_api(params)
 
-    @router.post('/delete', openapi_extra=UserRequest.meta(), response_model=UserInfo)
+    @router.post('/delete', openapi_extra=UserRequest.meta())
     @exception_handler
     async def delete(self, request: Request):
         params, metadata = await self.parse_request(request, self.token.credentials)
