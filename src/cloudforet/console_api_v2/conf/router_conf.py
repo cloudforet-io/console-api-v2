@@ -1,5 +1,12 @@
 ROUTER = [
     {
+        'router_path': 'cloudforet.console_api_v2.interface.rest.extension.resource:router',
+        'router_options': {
+            'prefix': '/console-api/extension/resource',
+            'tags': ['console-api > extension > resource']
+        }
+    },
+    {
         'router_path': 'cloudforet.console_api_v2.interface.rest.identity.domain:router',
         'router_options': {
             'prefix': '/identity/domain',
