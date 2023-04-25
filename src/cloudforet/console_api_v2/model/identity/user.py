@@ -45,6 +45,7 @@ class SetRequiredActionsRequest(BaseAPIModel):
 class VerifyEmailRequest(BaseAPIModel):
     user_id: Union[str, None] = Field(...)
     email: Union[str, None] = Field(None)
+    force: Union[bool, None] = Field(None)
     domain_id: Union[str, None] = Field(None)
 
 
