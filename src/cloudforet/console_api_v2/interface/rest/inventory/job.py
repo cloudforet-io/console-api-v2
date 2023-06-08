@@ -44,6 +44,15 @@ class Job(BaseAPI):
             params['grpc_method'] = 'inventory.Job.list'
             return proxy_service.dispatch_api(params)
 
+    @router.post('/analyze')
+    @exception_handler
+    async def analyze(self, request: Request, body: dict = Body(...)):
+        params, metadata = await self.parse_request(request, self.token.credentials)
+
+        with self.locator.get_service(ProxyService, metadata) as proxy_service:
+            params['grpc_method'] = 'inventory.Job.analyze'
+            return proxy_service.dispatch_api(params)
+
     @router.post('/stat')
     @exception_handler
     async def stat(self, request: Request, body: dict = Body(...)):
