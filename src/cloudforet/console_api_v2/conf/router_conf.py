@@ -334,5 +334,12 @@ ROUTER = [
             'prefix': '/dashboard/custom-widget',
             'tags': ['dashboard > custom-widget'],
         }
+    },
+    {
+        'router_path': 'cloudforet.console_api_v2.interface.rest.plugin.plugin:router',
+        'router_options': {
+            'prefix': '/plugin/plugin',
+            'tags': ['plugin > plugin'],
+        }
     }
 ]
