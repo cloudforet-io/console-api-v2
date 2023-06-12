@@ -105,17 +105,24 @@ ROUTER = [
         }
     },
     {
-        'router_path': 'cloudforet.console_api_v2.interface.rest.inventory.cloud_service_type:router',
-        'router_options': {
-            'prefix': '/inventory/cloud-service-type',
-            'tags': ['inventory > cloud-service-type']
-        }
-    },
-    {
         'router_path': 'cloudforet.console_api_v2.interface.rest.inventory.cloud_service:router',
         'router_options': {
             'prefix': '/inventory/cloud-service',
             'tags': ['inventory > cloud-service']
+        }
+    },
+    {
+        'router_path': 'cloudforet.console_api_v2.interface.rest.inventory.cloud_service_query_set:router',
+        'router_options': {
+            'prefix': '/inventory/cloud-service-query-set',
+            'tags': ['inventory > cloud-service-query-set']
+        }
+    },
+    {
+        'router_path': 'cloudforet.console_api_v2.interface.rest.inventory.cloud_service_stats:router',
+        'router_options': {
+            'prefix': '/inventory/cloud-service-stats',
+            'tags': ['inventory > cloud-service-stats']
         }
     },
     {
