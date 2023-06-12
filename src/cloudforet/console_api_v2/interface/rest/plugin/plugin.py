@@ -17,9 +17,9 @@ class Plugin(BaseAPI):
     token: HTTPAuthorizationCredentials = Depends(_AUTH_SCHEME)
     service = 'console-api'
 
-    @router.post('/get-metadata')
+    @router.post('/get-plugin-metadata')
     @exception_handler
-    async def get_metadata(self, request: Request, body: dict = Body()):
+    async def get_plugin_metadata(self, request: Request, body: dict = Body()):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
