@@ -23,7 +23,7 @@ class Project(BaseAPI):
         params, metadata = await self.parse_request(request, self.token.credentials)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
-            params['grpc_method'] = 'identity.Project.delete'
+            params['grpc_method'] = 'identity.Project.create'
             return proxy_service.dispatch_api(params)
 
     @router.post('/update', openapi_extra=UpdateProjectRequest.meta(), response_model=ProjectInfo)
@@ -35,7 +35,16 @@ class Project(BaseAPI):
             params['grpc_method'] = 'identity.Project.update'
             return proxy_service.dispatch_api(params)
 
-    @router.post('/member/modify')
+    @router.post('/update', openapi_extra=UpdateProjectRequest.meta(), response_model=ProjectInfo)
+    @exception_handler
+    async def update(self, request: Request):
+        params, metadata = await self.parse_request(request, self.token.credentials)
+
+        with self.locator.get_service(ProxyService, metadata) as proxy_service:
+            params['grpc_method'] = 'identity.Project.update'
+            return proxy_service.dispatch_api(params)
+
+    @router.post('/member-modify')
     @exception_handler
     async def modify_member(self, request: Request, body: dict = Body(...)):
         params, metadata = await self.parse_request(request, self.token.credentials)
@@ -44,7 +53,7 @@ class Project(BaseAPI):
             params['grpc_method'] = 'identity.Project.modify_member'
             return proxy_service.dispatch_api(params)
 
-    @router.post('/member/list')
+    @router.post('/member-list')
     @exception_handler
     async def list_members(self, request: Request, body: dict = Body(...)):
         params, metadata = await self.parse_request(request, self.token.credentials)
