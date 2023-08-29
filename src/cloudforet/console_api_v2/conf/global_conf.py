@@ -1,8 +1,16 @@
+EXTENSION_SWAGGER_PATH = '/opt/cloudforet/openapi'
 TITLE = 'Http API for Cloudforet'
 DESCRIPTION = """
-You need api key for authorization. 
+You need to issue api key to use Cloudforet API.
+<br>
+Please read this user [guide](https://cloudforet.io/docs/guides/my-page/access-with-api-cli/) first.
 
-If you want to issue api key, please read this [documentation](https://cloudforet.io/docs/guides/my-page/access-with-api-cli/) first.
+After issuing api key, enter the api key in the [Authorize] button on the right side of the screen.
+<br>
+<br>
+If you're interested in learning more about Cloudforet, please visit our [website](https://cloudforet.io/).
+<br>
+For a more comprehensive understanding of the Cloudforet API, please visit our [documentation](https://cloudforet-io.github.io/api-doc/).
 """
 
 UVICORN_OPTIONS = {}
