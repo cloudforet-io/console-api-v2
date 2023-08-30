@@ -10,7 +10,7 @@ _LOGGER = logging.getLogger(__name__)
 class CloudforetManager(BaseManager):
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super().__init__(**kwargs)
         self.connectors = {}
 
     def get_connector(self, service):
