@@ -18,15 +18,11 @@ class GetCostRequest(BaseAPIModel):
 
 class CostQuery(BaseAPIModel):
     cost_id: Union[str, None] = Field(None)
-    original_currency: Union[str, None] = Field(None)
     provider: Union[str, None] = Field(None)
     region_code: Union[str, None] = Field(None)
     region_key: Union[str, None] = Field(None)
-    category: Union[str, None] = Field(None)
     product: Union[str, None] = Field(None)
-    account: Union[str, None] = Field(None)
     usage_type: Union[str, None] = Field(None)
-    resource_group: Union[str, None] = Field(None)
     resource: Union[str, None] = Field(None)
     service_account_id: Union[str, None] = Field(None)
     project_id: Union[str, None] = Field(None)
@@ -38,18 +34,14 @@ class CostQuery(BaseAPIModel):
 
 class CostInfo(BaseAPIModel):
     cost_id: Union[str, None] = Field(None)
-    usd_cost: Union[str, None] = Field(None)
-    original_currency: Union[str, None] = Field(None)
-    original_cost: Union[float, None] = Field(None)
+    cost: Union[float, None] = Field(None)
     usage_quantity: Union[float, None] = Field(None)
+    usage_unit: Union[str, None] = Field(None)
     provider: Union[str, None] = Field(None)
     region_code: Union[str, None] = Field(None)
     region_key: Union[str, None] = Field(None)
-    category: Union[str, None] = Field(None)
     product: Union[str, None] = Field(None)
-    account: Union[str, None] = Field(None)
     usage_type: Union[str, None] = Field(None)
-    resource_group: Union[str, None] = Field(None)
     resource: Union[str, None] = Field(None)
     tags: Union[dict, None] = Field(None)
     additional_info: Union[dict, None] = Field(None)
@@ -57,8 +49,7 @@ class CostInfo(BaseAPIModel):
     project_id: Union[str, None] = Field(None)
     data_source_id: Union[str, None] = Field(None)
     domain_id: Union[str, None] = Field(None)
-    billed_at: Union[datetime, None] = Field(None)
-    created_at: Union[datetime, None] = Field(None)
+    billed_date: Union[str, None] = Field(None)
 
 
 class CostsInfo(BaseAPIModel):
@@ -66,7 +57,8 @@ class CostsInfo(BaseAPIModel):
     total_count: Union[int, None] = Field(None)
 
 
-class CostAnalyzeV2Query(BaseAPIModel):
+class CostAnalyzeQuery(BaseAPIModel):
+    data_source_id: Union[str, None] = Field(None)
     query: dict = Field(None)
     domain_id: Union[str, None] = Field(None)
 
