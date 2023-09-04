@@ -1,12 +1,5 @@
 ROUTER = [
     {
-        'router_path': 'cloudforet.console_api_v2.interface.rest.extension.resource:router',
-        'router_options': {
-            'prefix': '/console-api/extension/resource',
-            'tags': ['console-api > extension > resource']
-        }
-    },
-    {
         'router_path': 'cloudforet.console_api_v2.interface.rest.identity.domain:router',
         'router_options': {
             'prefix': '/identity/domain',
@@ -245,10 +238,10 @@ ROUTER = [
         }
     },
     {
-        'router_path': 'cloudforet.console_api_v2.interface.rest.cost_analysis.exchange_rate:router',
+        'router_path': 'cloudforet.console_api_v2.interface.rest.cost_analysis.data_source_rule:router',
         'router_options': {
-            'prefix': '/cost-analysis/exchange-rate',
-            'tags': ['cost-analysis > exchange-rate'],
+            'prefix': '/cost-analysis/data-source-rule',
+            'tags': ['cost-analysis > data-source-rule'],
         }
     },
     {
@@ -256,13 +249,6 @@ ROUTER = [
         'router_options': {
             'prefix': '/cost-analysis/cost',
             'tags': ['cost-analysis > cost'],
-        }
-    },
-    {
-        'router_path': 'cloudforet.console_api_v2.interface.rest.cost_analysis.data_source_rule:router',
-        'router_options': {
-            'prefix': '/cost-analysis/data-source-rule',
-            'tags': ['cost-analysis > data-source-rule'],
         }
     },
     {
@@ -280,31 +266,10 @@ ROUTER = [
         }
     },
     {
-        'router_path': 'cloudforet.console_api_v2.interface.rest.cost_analysis.public_dashboard:router',
-        'router_options': {
-            'prefix': '/cost-analysis/public-dashboard',
-            'tags': ['cost-analysis > public-dashboard'],
-        }
-    },
-    {
-        'router_path': 'cloudforet.console_api_v2.interface.rest.cost_analysis.user_dashboard:router',
-        'router_options': {
-            'prefix': '/cost-analysis/user-dashboard',
-            'tags': ['cost-analysis > user-dashboard'],
-        }
-    },
-    {
         'router_path': 'cloudforet.console_api_v2.interface.rest.cost_analysis.cost_query_set:router',
         'router_options': {
             'prefix': '/cost-analysis/cost-query-set',
             'tags': ['cost-analysis > cost-query-set']
-        }
-    },
-    {
-        'router_path': 'cloudforet.console_api_v2.interface.rest.cost_analysis.custom_widget:router',
-        'router_options': {
-            'prefix': '/cost-analysis/custom-widget',
-            'tags': ['cost-analysis > custom-widget']
         }
     },
     {
