@@ -1,7 +1,11 @@
 import json
 import logging
+import os
+
 from fastapi import APIRouter, Request
+
 from spaceone.core import config
+from spaceone.core.cache import cacheable
 
 
 _LOGGER = logging.getLogger(__name__)
@@ -16,17 +20,20 @@ def _add_mounted_apis(app, path=None):
     return apis
 
 
-def _add_apis_from_openapi_json(route):
+@cacheable(key='reflection', backend='local')
+def _add_apis_from_openapi_json():
     apis = []
-    extension_swagger_path = config.get_global('EXTENSION_SWAGGER_PATH')
-    service_name = route.path.split('/')[1].replace('-', '_')
-    with open(f'{extension_swagger_path}/{service_name}_openapi.json', 'r') as f:
-        openapi_json = json.loads(f.read())
-        for path, value in openapi_json.get('paths').items():
-            if path != 'securitySchemes':
-                name = path.split('/')[-1]
-                method = [next(iter(value))]
-                apis.append({'path': path, 'name': name, 'method': method})
+    openapi_json_dir = config.get_global('OPENAPI_JSON_DIR')
+    openapi_file_name_list = os.listdir(openapi_json_dir)
+
+    for open_api_file_name in openapi_file_name_list:
+        with open(f'{openapi_json_dir}/{open_api_file_name}', 'r') as f:
+            openapi_json = json.loads(f.read())
+            for path, value in openapi_json.get('paths').items():
+                if path != 'securitySchemes':
+                    name = path.split('/')[-1]
+                    method = [next(iter(value))]
+                    apis.append({'path': path, 'name': name, 'method': method})
     return apis
 
 
@@ -39,7 +46,7 @@ async def api_reflection(request: Request):
             response['apis'].append({'path': route.path, 'name': route.name, 'method': []})
             response['apis'].extend(_add_mounted_apis(route.app, route.path))
         elif '/openapi.json' in route.path and len(route.path.split('/')) > 2:
-            response['apis'].extend(_add_apis_from_openapi_json(route))
+            response['apis'].extend(_add_apis_from_openapi_json())
         else:
             response['apis'].append({'path': route.path, 'name': route.name, 'method': route.methods})
     return response
