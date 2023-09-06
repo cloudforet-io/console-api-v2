@@ -14,6 +14,11 @@ ROUTER = [
     #     }
     # },
     {
+        'router_path': 'cloudforet.console_api_v2.interface.rest.swagger:router'
+    },
+    {
         'router_path': 'cloudforet.console_api_v2.interface.rest.proxy:router',
     }
 ]
+
+
