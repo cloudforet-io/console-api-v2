@@ -16,22 +16,37 @@ For a more comprehensive understanding of the Cloudforet API, please visit our [
 [Home](/docs)\n
 | **Name** | **Description**  |
 |---|---|
-| [Identity](/identity/docs) | This is a Identity Service | 
-| [Inventory](/inventory/docs) | This is a Inventory Service | 
-| [Cost Analysis](/cost-analysis/docs) | This is a Board Service |
-| [Monitoring](/monitoring/docs) | This is a Monitoring Service | 
-| [Notification](/notification/docs) | This is a Notification Service | 
-| [Repository](/repository/docs) | This is a Repository Service | 
-| [Board](/board/docs) | This is a Board Service | 
-| [Config](/config/docs) | This is a Config Service | 
-| [Dashboard](/dashboard/docs) | This is a Dashboard Service | 
-| [File Manager](/file-manager/docs) | This is a File Manager Service | 
-| [Plugin](/plugin/docs) | This is a Plugin Service | 
-| [Secret](/secret/docs) | This is a Secret Service | 
-| [Statistics](/statistics/docs) | This is a Statistics Service | 
+| [Identity](/identity/docs) | Identity Service | 
+| [Inventory](/inventory/docs) | Inventory Service | 
+| [Cost Analysis](/cost-analysis/docs) | Cost Analysis Service |
+| [Monitoring](/monitoring/docs) |Monitoring Service | 
+| [Notification](/notification/docs) | Notification Service | 
+| [Repository](/repository/docs) | Repository Service | 
+| [Board](/board/docs) | Board Service | 
+| [Config](/config/docs) | Config Service | 
+| [Dashboard](/dashboard/docs) | Dashboard Service | 
+| [File Manager](/file-manager/docs) | File Manager Service | 
+| [Plugin](/plugin/docs) | Plugin Service | 
+| [Secret](/secret/docs) | Secret Service | 
+| [Statistics](/statistics/docs) | Statistics Service | 
 """
 
-OPENAPI_JSON_DIR = '/opt/cloudforet/openapi'
+OPENAPI_JSON_DIRS = [
+    '/opt/openapi/cloudforet/api/identity/v1/*.json',
+    '/opt/openapi/cloudforet/api/inventory/v1/*.json',
+    '/opt/openapi/cloudforet/api/cost-analysis/v1/*.json',
+    '/opt/openapi/cloudforet/api/monitoring/v1/*.json',
+    '/opt/openapi/cloudforet/api/notification/v1/*.json',
+    '/opt/openapi/cloudforet/api/repository/v1/*.json',
+    '/opt/openapi/cloudforet/api/board/v1/*.json',
+    '/opt/openapi/cloudforet/api/config/v1/*.json',
+    '/opt/openapi/cloudforet/api/dashboard/v1/*.json',
+    '/opt/openapi/cloudforet/api/file-manager/v1/*.json',
+    '/opt/openapi/cloudforet/api/plugin/v1/*.json',
+    '/opt/openapi/cloudforet/api/secret/v1/*.json',
+    '/opt/openapi/cloudforet/api/statistics/v1/*.json'
+    # '/opt/openapi/cloudforet/api/repository/v2/*.json'
+]
 
 UVICORN_OPTIONS = {
     'factory': True
