@@ -11,19 +11,12 @@ class CloudforetManager(BaseManager):
 
     def __init__(self, *args, **kwargs):
         super().__init__(**kwargs)
-        self.connectors = {}
 
-    def get_connector(self, service):
-        if service not in self.connectors:
-            self.connectors[service] = self.locator.get_connector('SpaceConnector', service=service)
-
-        return self.connectors[service]
-
-    def dispatch_api(self, grpc_method, params):
+    def dispatch_api(self, grpc_method, params, token=None):
         service, resource, verb = self._parse_grpc_method(grpc_method)
-        connector: SpaceConnector = self.get_connector(service)
+        space_connector: SpaceConnector = self.locator.get_connector('SpaceConnector', service=service, token=token)
 
-        return connector.dispatch(f'{resource}.{verb}', params)
+        return space_connector.dispatch(f'{resource}.{verb}', params)
 
     @staticmethod
     def _parse_grpc_method(grpc_method):
