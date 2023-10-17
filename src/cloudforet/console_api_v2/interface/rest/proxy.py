@@ -4,6 +4,7 @@ import json
 import os
 
 from fastapi import Request, Depends
+from fastapi.concurrency import run_in_threadpool
 from fastapi_utils.cbv import cbv
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi_utils.inferring_router import InferringRouter
@@ -94,7 +95,5 @@ class Proxy(BaseAPI):
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
             params['grpc_method'] = f'{service}.{resource}.{verb}'
-            response = await proxy_service.dispatch_api(params)
+            response = await run_in_threadpool(proxy_service.dispatch_api, params)
             return response
-
-

@@ -18,7 +18,7 @@ class ProxyService(BaseService):
 
     @transaction
     @check_required(['grpc_method'])
-    async def dispatch_api(self, params):
+    def dispatch_api(self, params):
         grpc_method = params['grpc_method']
         del params['grpc_method']
         return self.cf_mgr.dispatch_api(grpc_method, params, self.token)
