@@ -1,3 +1,4 @@
+import functools
 import logging
 from functools import wraps
 
@@ -12,8 +13,6 @@ class ProxyService(BaseService):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        if metadata := kwargs.get('metadata', {}):
-            self.token = metadata.get('token')
         self.cf_mgr: CloudforetManager = self.locator.get_manager(CloudforetManager)
 
     @transaction
@@ -21,4 +20,4 @@ class ProxyService(BaseService):
     def dispatch_api(self, params):
         grpc_method = params['grpc_method']
         del params['grpc_method']
-        return self.cf_mgr.dispatch_api(grpc_method, params, self.token)
+        return self.cf_mgr.dispatch_api(grpc_method, params)
