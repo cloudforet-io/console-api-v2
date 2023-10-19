@@ -29,7 +29,7 @@ def _get_openapi_json_data(service):
                     break
                 with open(openapi_json_file, 'r') as f:
                     return json.loads(f.read())
-    _LOGGER.error(f'[_get_openapi_json_data] openapi.json for {service} not found')
+    _LOGGER.error(f'[_get_openapi_json_data] in this dirs {openapi_json_dirs} openapi.json not found for {service}')
     raise ERROR_NOT_FOUND(key=service, value='openapi.json')
 
 
