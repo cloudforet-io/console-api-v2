@@ -10,20 +10,12 @@ _LOGGER = logging.getLogger(__name__)
 class CloudforetManager(BaseManager):
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.connectors = {}
-
-    def get_connector(self, service):
-        if service not in self.connectors:
-            self.connectors[service] = self.locator.get_connector('SpaceConnector', service=service)
-
-        return self.connectors[service]
+        super().__init__(**kwargs)
 
     def dispatch_api(self, grpc_method, params):
         service, resource, verb = self._parse_grpc_method(grpc_method)
-        connector: SpaceConnector = self.get_connector(service)
-
-        return connector.dispatch(f'{resource}.{verb}', params)
+        space_connector: SpaceConnector = self.locator.get_connector('SpaceConnector', service=service)
+        return space_connector.dispatch(f'{resource}.{verb}', params)
 
     @staticmethod
     def _parse_grpc_method(grpc_method):

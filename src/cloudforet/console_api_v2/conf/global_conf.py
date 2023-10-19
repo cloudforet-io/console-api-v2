@@ -1,11 +1,56 @@
-TITLE = 'Http API for Cloudforet'
-DESCRIPTION = """
-You need api key for authorization. 
+REST_TITLE = 'Http API for Cloudforet'
+REST_DESCRIPTION = """
+You need to issue api key to use Cloudforet API.
+<br>
+Please read this user [guide](https://cloudforet.io/docs/guides/my-page/access-with-api-cli/) first.
 
-If you want to issue api key, please read this [documentation](https://cloudforet.io/docs/guides/my-page/access-with-api-cli/) first.
+After issuing api key, enter the api key in the [Authorize] button on the right side of the screen.
+<br>
+<br>
+If you're interested in learning more about Cloudforet, please visit our [website](https://cloudforet.io/).
+<br>
+For a more comprehensive understanding of the Cloudforet API, please visit our [documentation](https://cloudforet-io.github.io/api-doc/).
+<br>
+<br>
+## List of Services \n
+[Home](/docs)\n
+| **Name** | **Description**  |
+|---|---|
+| [Identity](/identity/docs) | Identity Service | 
+| [Inventory](/inventory/docs) | Inventory Service | 
+| [Cost Analysis](/cost-analysis/docs) | Cost Analysis Service |
+| [Monitoring](/monitoring/docs) |Monitoring Service | 
+| [Notification](/notification/docs) | Notification Service | 
+| [Repository](/repository/docs) | Repository Service | 
+| [Board](/board/docs) | Board Service | 
+| [Config](/config/docs) | Config Service | 
+| [Dashboard](/dashboard/docs) | Dashboard Service | 
+| [File Manager](/file-manager/docs) | File Manager Service | 
+| [Plugin](/plugin/docs) | Plugin Service | 
+| [Secret](/secret/docs) | Secret Service | 
+| [Statistics](/statistics/docs) | Statistics Service | 
 """
 
-UVICORN_OPTIONS = {}
+OPENAPI_JSON_DIRS = [
+    '/opt/openapi/cloudforet/api/identity/v1/*.json',
+    '/opt/openapi/cloudforet/api/inventory/v1/*.json',
+    '/opt/openapi/cloudforet/api/cost-analysis/v1/*.json',
+    '/opt/openapi/cloudforet/api/monitoring/v1/*.json',
+    '/opt/openapi/cloudforet/api/notification/v1/*.json',
+    '/opt/openapi/cloudforet/api/repository/v1/*.json',
+    '/opt/openapi/cloudforet/api/board/v1/*.json',
+    '/opt/openapi/cloudforet/api/config/v1/*.json',
+    '/opt/openapi/cloudforet/api/dashboard/v1/*.json',
+    '/opt/openapi/cloudforet/api/file-manager/v1/*.json',
+    '/opt/openapi/cloudforet/api/plugin/v1/*.json',
+    '/opt/openapi/cloudforet/api/secret/v1/*.json',
+    '/opt/openapi/cloudforet/api/statistics/v1/*.json'
+    # '/opt/openapi/cloudforet/api/repository/v2/*.json'
+]
+
+UVICORN_OPTIONS = {
+    'factory': True
+}
 
 LOG = {
     'loggers': {
@@ -15,6 +60,7 @@ LOG = {
         }
     }
 }
+
 
 CONNECTORS = {
     'SpaceConnector': {
