@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y git
 RUN mkdir -p ${OPENAPI_JSON_DIR}
 WORKDIR ${GIT_DIR}
 RUN git clone https://github.com/cloudforet-io/api.git
-RUN cp api/dist/openapi/* ${OPENAPI_JSON_DIR}
+RUN cp -r api/dist/openapi/* ${OPENAPI_JSON_DIR}
 RUN rm -rf ${GIT_DIR}
 
 COPY src ${SRC_DIR}
