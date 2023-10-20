@@ -1,6 +1,6 @@
-REST_TITLE = 'Http API for Cloudforet'
+REST_TITLE = 'REST API for Cloudforet'
 REST_DESCRIPTION = """
-You need to issue api key to use Cloudforet API.
+You need to issue api key to use API.
 <br>
 Please read this user [guide](https://cloudforet.io/docs/guides/my-page/access-with-api-cli/) first.
 
