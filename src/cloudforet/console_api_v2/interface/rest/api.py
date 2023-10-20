@@ -57,7 +57,7 @@ def _get_apis(request):
             apis.extend(_add_apis_from_openapi_json())
         else:
             apis.append({'path': route.path, 'name': route.name, 'method': route.methods})
-    return apis
+    return {'apis': apis}
 
 
 @router.get('/reflection')
