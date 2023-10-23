@@ -1,2 +1,1 @@
-spaceone-core
 spaceone-api
