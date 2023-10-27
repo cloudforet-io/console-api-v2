@@ -138,6 +138,7 @@ jobs:
           tags: ${{ secrets.ECR_REPO }}/${{ github.event.repository.name }}:${{ env.VERSION }}
           build-args: |
             PACKAGE_VERSION=${{ env.PACKAGE_VERSION }}
+            BRANCH_NAME=${{ env.BRANCH_NAME }}
 
       - name: Notice when job fails
         if: failure()
