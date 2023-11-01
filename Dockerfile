@@ -1,4 +1,4 @@
-FROM cloudforet/python-core:1.12
+FROM cloudforet/python-core:2.0
 ARG PACKAGE_VERSION
 ARG BRANCH_NAME
 ENV PYTHONUNBUFFERED 1
@@ -12,8 +12,8 @@ ENV PACKAGE_VERSION=$PACKAGE_VERSION
 
 COPY pkg/pip_requirements.txt pip_requirements.txt
 
-RUN pip install --upgrade -r pip_requirements.txt
 RUN apt-get update && apt-get install -y git
+RUN pip install --upgrade -r pip_requirements.txt
 
 RUN mkdir -p ${OPENAPI_JSON_DIR}
 WORKDIR ${GIT_DIR}
@@ -25,8 +25,6 @@ COPY src ${SRC_DIR}
 WORKDIR ${SRC_DIR}
 
 RUN python3 setup.py install && rm -rf /tmp/*
-
-RUN pip install --upgrade spaceone-api
 
 EXPOSE ${SPACEONE_PORT}
 
