@@ -57,7 +57,7 @@ def _path_exists(path, routes):
     return False
 
 
-@cacheable(key='path:{service}:{resource}:{verb}', backend='local')
+@cacheable(key='path:{service}:{resource}:{verb}', alias='local')
 def _request_path_validator(service, resource, verb, app):
     routes = app.routes
     path = os.path.join('/', service, resource, verb)

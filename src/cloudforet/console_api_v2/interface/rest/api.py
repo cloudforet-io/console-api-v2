@@ -46,7 +46,7 @@ def _add_apis_from_openapi_json():
     return apis
 
 
-@cacheable(key='api-reflection', backend='local')
+@cacheable(key='api-reflection', alias='local')
 def _get_apis(request):
     apis = []
     for route in request.app.routes:

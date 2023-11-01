@@ -17,7 +17,7 @@ _LOGGER = logging.getLogger(__name__)
 router = APIRouter(include_in_schema=False)
 
 
-@cacheable(key='openapi-json:{service}', backend='local')
+@cacheable(key='openapi-json:{service}', alias='local')
 def _get_openapi_json_data(service):
     openapi_json_dirs = config.get_global('OPENAPI_JSON_DIRS', [])
 
@@ -33,7 +33,7 @@ def _get_openapi_json_data(service):
     raise ERROR_NOT_FOUND(key=service, value='openapi.json')
 
 
-@cacheable(key='swagger-ui-html:{service}', backend='local')
+@cacheable(key='swagger-ui-html:{service}', alias='local')
 def _get_swagger_ui_html(request: Request, service):
     return get_swagger_ui_html(
         openapi_url=f'/{service}/openapi.json',
