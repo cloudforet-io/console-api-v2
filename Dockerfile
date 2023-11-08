@@ -2,7 +2,7 @@ FROM cloudforet/python-core:2.0
 ARG PACKAGE_VERSION
 ARG BRANCH_NAME
 ENV PYTHONUNBUFFERED 1
-ENV SPACEONE_PORT 50051
+ENV SPACEONE_PORT 8000
 ENV SRC_DIR /tmp/src
 ENV CONF_DIR /etc/spaceone
 ENV LOG_DIR /var/log/spaceone
@@ -12,7 +12,8 @@ ENV PACKAGE_VERSION=$PACKAGE_VERSION
 
 COPY pkg/pip_requirements.txt pip_requirements.txt
 
-RUN pip install --upgrade -r pip_requirements.txt
+RUN pip install --upgrade pip && \
+    pip install --upgrade -r pip_requirements.txt
 RUN apt-get update && apt-get install -y git
 
 RUN mkdir -p ${OPENAPI_JSON_DIR}
@@ -31,4 +32,4 @@ RUN pip install --upgrade spaceone-api
 EXPOSE ${SPACEONE_PORT}
 
 ENTRYPOINT ["spaceone"]
-CMD ["rest", "cloudforet.console_api_v2", "-m", "/opt"]
+CMD ["run", "rest-server", "cloudforet.console_api_v2", "-m", "/opt"]
