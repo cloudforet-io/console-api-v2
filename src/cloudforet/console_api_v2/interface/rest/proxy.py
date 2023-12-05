@@ -70,7 +70,12 @@ def _request_path_validator(service, resource, verb, app):
 
 def _convert_service_resource_verb(service, resource, verb):
     service = service.replace('-','_').lower()
-    resource = resource.replace('-', ' ').title().replace(' ', '')
+
+    if resource == 'api-key':
+        resource = 'APIKey'
+    else:
+        resource = resource.replace('-', ' ').title().replace(' ', '')
+
     verb = verb.replace('-', '_').lower()
     return service, resource, verb
 
