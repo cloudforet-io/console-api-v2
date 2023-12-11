@@ -58,6 +58,15 @@ LOG = {
             'level': 'DEBUG',
             'handlers': ['console']
         }
+    },
+    'filters': {
+      'masking': {
+          'rules': {
+              'Auth.dispatch_api': [
+                  'token'
+              ]
+          }
+      }
     }
 }
 
