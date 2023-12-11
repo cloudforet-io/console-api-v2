@@ -25,9 +25,8 @@ class Auth(BaseAPI):
 
     @router.get('/basic-auth')
     @exception_handler
-    async def basic_auth(self, params: AuthBasicAuthRequest = Depends(), token: HTTPAuthorizationCredentials = Depends(_AUTH_SCHEME)):
-        _LOGGER.debug(f'[basic_auth] params: {params}')
-        params.token = params.token or token.credentials
+    async def basic_auth(self, params: AuthBasicAuthRequest = Depends()):
+        params.token = params.token or self.token.credentials
 
         if params.token is None:
             raise ERROR_REQUIRED_PARAMETER(message='empty token provided.')
