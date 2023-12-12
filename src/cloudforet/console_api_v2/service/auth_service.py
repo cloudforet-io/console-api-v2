@@ -1,6 +1,8 @@
+import base64
 import json
 import logging
 
+from spaceone.core import config
 from spaceone.core.auth.jwt import JWTAuthenticator, JWTUtil
 from spaceone.core.error import ERROR_AUTHENTICATE_FAILURE
 from spaceone.core.service import *
@@ -15,21 +17,28 @@ class AuthService(BaseService):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.cf_mgr = CloudforetManager()
 
     @transaction
-    def basic_auth(self, params: dict) -> None:
+    def basic(self, params: dict) -> None:
         """Basic authentication
         Args:
             params: dict: {
-                'token': 'str'
+                'http_authorization': 'str'
             }
         Returns:
             None
 
         """
 
-        token: str = params["token"]
+        http_authorization: str = params["http_authorization"]
+        auth_type, http_authorization = http_authorization.split(' ')
+
+        if auth_type != 'Basic':
+            raise ERROR_AUTHENTICATE_FAILURE(message='Invalid authorization type.')
+
+        decoded = base64.b64decode(http_authorization).decode('utf-8')
+        service_account_id, token = decoded.split(':')
+
         domain_id = self._extract_domain_id(token)
         self._authenticate(token, domain_id)
 
@@ -38,8 +47,10 @@ class AuthService(BaseService):
         return JWTAuthenticator(json.loads(public_key)).validate(token)
 
     def _get_public_key(self, domain_id: str) -> str:
+        system_token = config.get_global().get('TOKEN')
+        cloudforet_mgr = CloudforetManager(token=system_token)
         _LOGGER.debug(f'[_get_public_key] get jwk from identity service: {domain_id}')
-        response = self.cf_mgr.dispatch_api('identity.Domain.get_public_key', {"domain_id": domain_id})
+        response = cloudforet_mgr.dispatch_api('identity.Domain.get_public_key', {"domain_id": domain_id})
         return response['public_key']
 
     @staticmethod

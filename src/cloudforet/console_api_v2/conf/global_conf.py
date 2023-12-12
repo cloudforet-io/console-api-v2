@@ -70,6 +70,8 @@ LOG = {
     }
 }
 
+# This value is intended for overriding the system token
+TOKEN = ''
 
 CONNECTORS = {
     'SpaceConnector': {
