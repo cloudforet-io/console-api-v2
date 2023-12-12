@@ -19,20 +19,17 @@ router = InferringRouter(include_in_schema=True)
 
 @cbv(router)
 class Auth(BaseAPI):
-    token: HTTPAuthorizationCredentials = Depends(_AUTH_SCHEME)
     service = 'console-api'
     resource = "Auth"
 
-    @router.get('/basic-auth')
+    @router.get('/basic')
     @exception_handler
-    async def basic_auth(self, params: AuthBasicAuthRequest = Depends()):
-        params.token = params.token or self.token.credentials
-
-        if params.token is None:
+    async def basic(self, params: AuthBasicAuthRequest = Depends()):
+        if params.http_authorization is None:
             raise ERROR_REQUIRED_PARAMETER(message='empty token provided.')
 
         auth_service = AuthService()
-        await run_in_threadpool(auth_service.basic_auth, params.dict())
+        await run_in_threadpool(auth_service.basic, params.dict())
         return {"status_code": "200"}
 
 

@@ -3,4 +3,4 @@ from pydantic import Field
 
 
 class AuthBasicAuthRequest(BaseAPIModel):
-    token: str = Field(default=None, description='Token for authentication')
+    http_authorization: str = Field(description='Token for authentication', default="Basic encoded_token")

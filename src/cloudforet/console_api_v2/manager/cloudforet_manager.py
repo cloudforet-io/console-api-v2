@@ -12,9 +12,9 @@ class CloudforetManager(BaseManager):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    def dispatch_api(self, grpc_method: str, params: dict):
+    def dispatch_api(self, grpc_method: str, params: dict, token: str = None):
         service, resource, verb = self._parse_grpc_method(grpc_method)
-        space_connector = SpaceConnector(service=service)
+        space_connector = SpaceConnector(service=service, token=token)
         return space_connector.dispatch(f'{resource}.{verb}', params)
 
     @staticmethod
