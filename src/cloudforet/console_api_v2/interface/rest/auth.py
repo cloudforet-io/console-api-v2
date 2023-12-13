@@ -1,6 +1,6 @@
 import logging
 
-from fastapi import Depends
+from fastapi import Depends, Header
 from fastapi.concurrency import run_in_threadpool
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi_utils.cbv import cbv
@@ -24,12 +24,12 @@ class Auth(BaseAPI):
 
     @router.get('/basic')
     @exception_handler
-    async def basic(self, params: AuthBasicAuthRequest = Depends()):
-        if params.http_authorization is None:
-            raise ERROR_REQUIRED_PARAMETER(message='empty token provided.')
+    async def basic(self, http_authorization: str = Header(alias='http_authorization', example="Basic dGVzdDp0ZXN0")) -> dict:
+        if http_authorization is None:
+            raise ERROR_REQUIRED_PARAMETER(message="empty token provided.")
 
         auth_service = AuthService()
-        await run_in_threadpool(auth_service.basic, params.dict())
+        await run_in_threadpool(auth_service.basic, {"http_authorization": http_authorization})
         return {"status_code": "200"}
 
 
