@@ -23,21 +23,16 @@ class AuthService(BaseService):
         """Basic authentication
         Args:
             params: dict: {
-                'http_authorization': 'str'
+                'user_name': 'str', # required
+                'password': 'str'   # required
             }
         Returns:
             None
 
         """
 
-        http_authorization: str = params["http_authorization"]
-        auth_type, http_authorization = http_authorization.split(' ')
-
-        if auth_type != 'Basic':
-            raise ERROR_AUTHENTICATE_FAILURE(message='Invalid authorization type.')
-
-        decoded = base64.b64decode(http_authorization).decode('utf-8')
-        service_account_id, token = decoded.split(':')
+        service_account_id = params['username']
+        token = params['password']
 
         domain_id = self._extract_domain_id(token)
         self._authenticate(token, domain_id)
