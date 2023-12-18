@@ -1,4 +1,4 @@
-REST_TITLE = 'REST API for Cloudforet'
+REST_TITLE = "REST API for Cloudforet"
 REST_DESCRIPTION = """
 You need to issue api key to use API.
 <br>
@@ -32,64 +32,51 @@ For a more comprehensive understanding of the Cloudforet API, please visit our [
 """
 
 OPENAPI_JSON_DIRS = [
-    '/opt/openapi/cloudforet/api/identity/v1/*.json',
-    '/opt/openapi/cloudforet/api/inventory/v1/*.json',
-    '/opt/openapi/cloudforet/api/cost_analysis/v1/*.json',
-    '/opt/openapi/cloudforet/api/monitoring/v1/*.json',
-    '/opt/openapi/cloudforet/api/notification/v1/*.json',
-    '/opt/openapi/cloudforet/api/repository/v1/*.json',
-    '/opt/openapi/cloudforet/api/board/v1/*.json',
-    '/opt/openapi/cloudforet/api/config/v1/*.json',
-    '/opt/openapi/cloudforet/api/dashboard/v1/*.json',
-    '/opt/openapi/cloudforet/api/file_manager/v1/*.json',
-    '/opt/openapi/cloudforet/api/plugin/v1/*.json',
-    '/opt/openapi/cloudforet/api/secret/v1/*.json',
-    '/opt/openapi/cloudforet/api/statistics/v1/*.json'
+    "/opt/openapi/cloudforet/api/identity/v1/*.json",
+    "/opt/openapi/cloudforet/api/inventory/v1/*.json",
+    "/opt/openapi/cloudforet/api/cost_analysis/v1/*.json",
+    "/opt/openapi/cloudforet/api/monitoring/v1/*.json",
+    "/opt/openapi/cloudforet/api/notification/v1/*.json",
+    "/opt/openapi/cloudforet/api/repository/v1/*.json",
+    "/opt/openapi/cloudforet/api/board/v1/*.json",
+    "/opt/openapi/cloudforet/api/config/v1/*.json",
+    "/opt/openapi/cloudforet/api/dashboard/v1/*.json",
+    "/opt/openapi/cloudforet/api/file_manager/v1/*.json",
+    "/opt/openapi/cloudforet/api/plugin/v1/*.json",
+    "/opt/openapi/cloudforet/api/secret/v1/*.json",
+    "/opt/openapi/cloudforet/api/statistics/v1/*.json"
     # '/opt/openapi/cloudforet/api/repository/v2/*.json'
 ]
 
-UVICORN_OPTIONS = {
-    'factory': True
-}
+UVICORN_OPTIONS = {"factory": True}
 
 LOG = {
-    'loggers': {
-        'cloudforet': {
-            'level': 'DEBUG',
-            'handlers': ['console']
-        }
+    "loggers": {"cloudforet": {"level": "DEBUG", "handlers": ["console"]}},
+    "filters": {
+        "masking": {"rules": {"Auth.basic": ["token"], "Proxy.dispatch": ["token"]}}
     },
-    'filters': {
-      'masking': {
-          'rules': {
-              'Auth.dispatch_api': [
-                  'token'
-              ]
-          }
-      }
-    }
 }
 
 # This value is intended for overriding the system token
-TOKEN = ''
+TOKEN = ""
 
 CONNECTORS = {
-    'SpaceConnector': {
-        'backend': 'spaceone.core.connector.space_connector.SpaceConnector',
-        'endpoints': {
-            'identity': 'grpc://identity:50051/v1',
-            'inventory': 'grpc://inventory:50051/v1',
-            'repository': 'grpc://repository:50051/v1',
-            'secret': 'grpc://secret:50051/v1',
-            'plugin': 'grpc://plugin:50051/v1',
-            'monitoring': 'grpc://monitoring:50051/v1',
-            'statistics': 'grpc://statistics:50051/v1',
-            'notification': 'grpc://notification:50051/v1',
-            'config': 'grpc://config:50051/v1',
-            'cost_analysis': 'grpc://cost-analysis:50051/v1',
-            'board': 'grpc://board:50051/v1',
-            'file_manager': 'grpc://file-manager:50051/v1',
-            'dashboard': 'grpc://dashboard:50051/v1',
-        }
+    "SpaceConnector": {
+        "backend": "spaceone.core.connector.space_connector.SpaceConnector",
+        "endpoints": {
+            "identity": "grpc://identity:50051/v1",
+            "inventory": "grpc://inventory:50051/v1",
+            "repository": "grpc://repository:50051/v1",
+            "secret": "grpc://secret:50051/v1",
+            "plugin": "grpc://plugin:50051/v1",
+            "monitoring": "grpc://monitoring:50051/v1",
+            "statistics": "grpc://statistics:50051/v1",
+            "notification": "grpc://notification:50051/v1",
+            "config": "grpc://config:50051/v1",
+            "cost_analysis": "grpc://cost-analysis:50051/v1",
+            "board": "grpc://board:50051/v1",
+            "file_manager": "grpc://file-manager:50051/v1",
+            "dashboard": "grpc://dashboard:50051/v1",
+        },
     },
 }
