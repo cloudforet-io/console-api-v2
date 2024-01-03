@@ -10,12 +10,13 @@ _LOGGER = logging.getLogger(__name__)
 
 @event_handler
 class ProxyService(BaseService):
+    resource = "Proxy"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.cf_mgr: CloudforetManager = self.locator.get_manager(CloudforetManager)
 
-    @transaction
+    @transaction()
     @check_required(['grpc_method'])
     def dispatch_api(self, params):
         grpc_method = params['grpc_method']
