@@ -19,7 +19,7 @@ class AuthService(BaseService):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    @transaction
+    @transaction()
     def basic(self, params: dict) -> None:
         """Basic authentication
         Args:

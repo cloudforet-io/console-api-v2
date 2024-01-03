@@ -53,7 +53,7 @@ UVICORN_OPTIONS = {"factory": True}
 LOG = {
     "loggers": {"cloudforet": {"level": "DEBUG", "handlers": ["console"]}},
     "filters": {
-        "masking": {"rules": {"Auth.basic": ["token"], "Proxy.dispatch": ["token"]}}
+        "masking": {"rules": {"Auth.basic": ["token", "password"], "Proxy.dispatch": ["token"]}}
     },
 }
 
