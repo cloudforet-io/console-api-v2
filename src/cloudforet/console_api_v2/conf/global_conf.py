@@ -32,7 +32,7 @@ For a more comprehensive understanding of the Cloudforet API, please visit our [
 """
 
 OPENAPI_JSON_DIRS = [
-    "/opt/openapi/cloudforet/api/identity/v1/*.json",
+    "/opt/openapi/cloudforet/api/identity/v2/*.json",
     "/opt/openapi/cloudforet/api/inventory/v1/*.json",
     "/opt/openapi/cloudforet/api/cost_analysis/v1/*.json",
     "/opt/openapi/cloudforet/api/monitoring/v1/*.json",
@@ -45,7 +45,6 @@ OPENAPI_JSON_DIRS = [
     "/opt/openapi/cloudforet/api/plugin/v1/*.json",
     "/opt/openapi/cloudforet/api/secret/v1/*.json",
     "/opt/openapi/cloudforet/api/statistics/v1/*.json"
-    # '/opt/openapi/cloudforet/api/repository/v2/*.json'
 ]
 
 UVICORN_OPTIONS = {"factory": True}
