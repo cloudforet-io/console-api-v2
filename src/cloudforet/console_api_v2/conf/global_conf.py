@@ -29,6 +29,7 @@ For a more comprehensive understanding of the Cloudforet API, please visit our [
 | [Plugin](/plugin/docs) | Plugin Service | 
 | [Secret](/secret/docs) | Secret Service | 
 | [Statistics](/statistics/docs) | Statistics Service | 
+| [Search](/search/docs) | Search Service |
 """
 
 OPENAPI_JSON_DIRS = [
@@ -45,6 +46,7 @@ OPENAPI_JSON_DIRS = [
     "/opt/openapi/cloudforet/api/plugin/v1/*.json",
     "/opt/openapi/cloudforet/api/secret/v1/*.json",
     "/opt/openapi/cloudforet/api/statistics/v1/*.json"
+    "/opt/openapi/cloudforet/api/search/v1/*.json",
 ]
 
 UVICORN_OPTIONS = {"factory": True}
@@ -52,7 +54,9 @@ UVICORN_OPTIONS = {"factory": True}
 LOG = {
     "loggers": {"cloudforet": {"level": "DEBUG", "handlers": ["console"]}},
     "filters": {
-        "masking": {"rules": {"Auth.basic": ["token", "password"], "Proxy.dispatch": ["token"]}}
+        "masking": {
+            "rules": {"Auth.basic": ["token", "password"], "Proxy.dispatch": ["token"]}
+        }
     },
 }
 
@@ -76,6 +80,7 @@ CONNECTORS = {
             "board": "grpc://board:50051/v1",
             "file_manager": "grpc://file-manager:50051/v1",
             "dashboard": "grpc://dashboard:50051/v1",
+            "search": "grpc://search:50051/v1",
         },
     },
 }
