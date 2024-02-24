@@ -45,7 +45,7 @@ OPENAPI_JSON_DIRS = [
     "/opt/openapi/cloudforet/api/file_manager/v1/*.json",
     "/opt/openapi/cloudforet/api/plugin/v1/*.json",
     "/opt/openapi/cloudforet/api/secret/v1/*.json",
-    "/opt/openapi/cloudforet/api/statistics/v1/*.json"
+    "/opt/openapi/cloudforet/api/statistics/v1/*.json",
     "/opt/openapi/cloudforet/api/search/v1/*.json",
 ]
 
