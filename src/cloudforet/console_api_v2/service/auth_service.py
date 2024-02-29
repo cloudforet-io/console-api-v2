@@ -42,12 +42,15 @@ class AuthService(BaseService):
         public_key = self._get_public_key(domain_id)
         return JWTAuthenticator(json.loads(public_key)).validate(token)
 
-    def _get_public_key(self, domain_id: str) -> str:
+    @staticmethod
+    def _get_public_key(domain_id: str) -> str:
         system_token = config.get_global().get("TOKEN")
-        cloudforet_mgr = CloudforetManager(token=system_token)
+        cloudforet_mgr = CloudforetManager()
         _LOGGER.debug(f"[_get_public_key] get jwk from identity service: {domain_id}")
         response = cloudforet_mgr.dispatch_api(
-            "identity.Domain.get_public_key", {"domain_id": domain_id}
+            "identity.Domain.get_public_key",
+            {"domain_id": domain_id},
+            token=system_token,
         )
         return response["public_key"]
 
