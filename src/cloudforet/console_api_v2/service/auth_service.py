@@ -1,4 +1,3 @@
-import base64
 import json
 import logging
 
@@ -24,7 +23,7 @@ class AuthService(BaseService):
         """Basic authentication
         Args:
             params: dict: {
-                'user_name': 'str', # required
+                'username': 'str', # required
                 'password': 'str'   # required
             }
         Returns:
