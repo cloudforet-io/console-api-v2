@@ -1,7 +1,10 @@
 ROUTER = [
     {
         "router_path": "cloudforet.console_api_v2.interface.rest.api:router",
-        "router_options": {"prefix": "/console-api/api", "tags": ["console-api > api"]},
+        "router_options": {
+            "prefix": "/console-api/api",
+            "tags": ["console-api > api"],
+        },
     },
     {
         "router_path": "cloudforet.console_api_v2.interface.rest.auth:router",
@@ -17,7 +20,9 @@ ROUTER = [
             "tags": ["console-api > extension > service-account" > "agent"],
         },
     },
-    {"router_path": "cloudforet.console_api_v2.interface.rest.swagger:router"},
+    {
+        "router_path": "cloudforet.console_api_v2.interface.rest.swagger:router",
+    },
     {
         "router_path": "cloudforet.console_api_v2.interface.rest.proxy:router",
     },
