@@ -21,6 +21,7 @@ class AuthService(BaseService):
     @transaction()
     def basic(self, params: dict) -> None:
         """Basic authentication
+
         Args:
             params: dict: {
                 'username': 'str', # required
@@ -28,13 +29,22 @@ class AuthService(BaseService):
             }
         Returns:
             None
-
         """
 
         service_account_id = params["username"]
         token = params["password"]
 
-        domain_id = self._extract_domain_id(token)
+        decoded_token_info = self.decode_token(token)
+        domain_id = self.extract_domain_id(decoded_token_info)
+        decoded_service_account_id = decoded_token_info["injected_params"][
+            "service_account_id"
+        ]
+
+        if service_account_id != decoded_service_account_id:
+            raise ERROR_AUTHENTICATE_FAILURE(
+                message=f"Given service account id {service_account_id} is not matched with {decoded_service_account_id}."
+            )
+
         self._authenticate(token, domain_id)
 
     def _authenticate(self, token: str, domain_id: str) -> dict:
@@ -54,14 +64,18 @@ class AuthService(BaseService):
         return response["public_key"]
 
     @staticmethod
-    def _extract_domain_id(token: str) -> str:
+    def extract_domain_id(token_info: dict) -> str:
+        if domain_id := token_info.get("did"):
+            return domain_id
+        else:
+            raise ERROR_AUTHENTICATE_FAILURE(message="empty domain_id provided.")
+
+    @staticmethod
+    def decode_token(token: str) -> dict:
         try:
             decoded = JWTUtil.unverified_decode(token)
         except Exception:
             _LOGGER.debug(f"[_extract_domain_id] failed to decode token: {token[:10]}")
             raise ERROR_AUTHENTICATE_FAILURE(message="failed to decode token.")
 
-        if domain_id := decoded.get("did"):
-            return domain_id
-        else:
-            raise ERROR_AUTHENTICATE_FAILURE(message="empty domain_id provided.")
+        return decoded
