@@ -1,6 +1,7 @@
 import json
 import logging
 
+from spaceone.core import cache
 from spaceone.core import config
 from spaceone.core.auth.jwt import JWTAuthenticator, JWTUtil
 from spaceone.core.error import ERROR_AUTHENTICATE_FAILURE
@@ -35,7 +36,9 @@ class AuthService(BaseService):
         token = params["password"]
 
         decoded_token_info = self.decode_token(token)
+
         domain_id = self.extract_domain_id(decoded_token_info)
+        client_id = decoded_token_info.get("jti")
         decoded_service_account_id = decoded_token_info["injected_params"][
             "service_account_id"
         ]
@@ -45,6 +48,7 @@ class AuthService(BaseService):
                 message=f"Given service account id {service_account_id} is not matched with {decoded_service_account_id}."
             )
 
+        self._check_app(client_id, domain_id)
         self._authenticate(token, domain_id)
 
     def _authenticate(self, token: str, domain_id: str) -> dict:
@@ -79,3 +83,20 @@ class AuthService(BaseService):
             raise ERROR_AUTHENTICATE_FAILURE(message="failed to decode token.")
 
         return decoded
+
+    @staticmethod
+    @cache.cacheable(
+        key="console-api-v2:auth:check-app:{domain_id}:client_id:{client_id}",
+        alias="local",
+    )
+    def _check_app(client_id: str, domain_id: str):
+        system_token = config.get_global("TOKEN")
+
+        _LOGGER.debug(f"[_check_app] check app from identity service: {client_id}")
+
+        cloudforet_mgr = CloudforetManager()
+        cloudforet_mgr.dispatch_api(
+            "identity.App.check",
+            {"client_id": client_id, "domain_id": domain_id},
+            token=system_token,
+        )
