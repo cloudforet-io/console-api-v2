@@ -14,10 +14,10 @@ ROUTER = [
         },
     },
     {
-        "router_path": "cloudforet.console_api_v2.interface.rest.extension.service_account.agent:router",
+        "router_path": "cloudforet.console_api_v2.interface.rest.extension.agent:router",
         "router_options": {
-            "prefix": "/console-api/extension/service-account/agent",
-            "tags": ["console-api > extension > service-account" > "agent"],
+            "prefix": "/console-api/extension/agent",
+            "tags": ["console-api > extension > agent"],
         },
     },
     {
