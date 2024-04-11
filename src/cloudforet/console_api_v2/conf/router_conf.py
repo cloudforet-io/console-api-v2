@@ -7,10 +7,10 @@ ROUTER = [
         },
     },
     {
-        "router_path": "cloudforet.console_api_v2.interface.rest.auth:router",
+        "router_path": "cloudforet.console_api_v2.interface.rest.extension.auth:router",
         "router_options": {
-            "prefix": "/console-api/auth",
-            "tags": ["console-api > auth"],
+            "prefix": "/console-api/extension/auth",
+            "tags": ["console-api > extension > auth"],
         },
     },
     {
