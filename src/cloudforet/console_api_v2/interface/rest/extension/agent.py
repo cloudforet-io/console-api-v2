@@ -17,7 +17,8 @@ router = InferringRouter(include_in_schema=True)
 @cbv(router)
 class Agent(BaseAPI):
     token: HTTPAuthorizationCredentials = Depends(_AUTH_SCHEME)
-    service = "Agent"
+    service = "console-api"
+    resource = "Agent"
 
     @router.get("/kubernetes")
     @exception_handler

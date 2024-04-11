@@ -22,7 +22,7 @@ class AgentService(BaseService):
     @check_required(["service_account_id", "token"])
     def kubernetes(self, params: dict) -> str:
         """Generates a YAML configuration for the SpaceONE Agent setup based on
-        the SpaceONE service account info.
+        the SpaceONE agent info.
 
         Args:
             params (dict): {
@@ -34,28 +34,28 @@ class AgentService(BaseService):
         """
 
         cloudforet_mgr = CloudforetManager()
-        service_account_info = self._get_service_account_info(cloudforet_mgr, params)
+        agent_info = self._get_agent_info(cloudforet_mgr, params)
 
         self._validate_token(params["service_account_id"], params["token"])
 
-        params.update(self._validate_and_update_options(service_account_info))
+        params.update(self._validate_and_update_options(agent_info))
         yaml_config: dict = self._construct_yaml_format(params)
 
         return yaml.dump(yaml_config, sort_keys=False)
 
     @staticmethod
-    def _get_service_account_info(manager, params: dict) -> dict:
-        """Retrieves service account information using the Cloudforet Manager.
+    def _get_agent_info(manager, params: dict) -> dict:
+        """Retrieves agent information using the Cloudforet Manager.
 
         Args:
             manager: The Cloudforet Manager instance used for making API calls.
             params (dict): A dictionary containing 'service_account_id' and 'token'
                            for authentication and identification of the service account.
         Returns:
-            dict: The service account information returned from the Cloudforet API.
+            dict: The agent information returned from the Cloudforet API.
         """
         return manager.dispatch_api(
-            "identity.ServiceAccount.get",
+            "identity.Agent.get",
             params={"service_account_id": params["service_account_id"]},
             token=params["token"],
         )
@@ -78,12 +78,12 @@ class AgentService(BaseService):
             )
 
     @staticmethod
-    def _validate_and_update_options(service_account_info: dict) -> dict:
-        """Validates the presence of required fields in the service account info
+    def _validate_and_update_options(agent_info: dict) -> dict:
+        """Validates the presence of required fields in the agent info
         and updates the params dictionary with extracted options.
 
         Args:
-            service_account_info (dict): Dictionary containing the service account info.
+            agent_info (dict): Dictionary containing the agent info.
         Returns:
             options (dict): Updated options dictionary with keys 'cluster_name',
             'kube_state_metrics', and 'prometheus_node_exporter' {
@@ -97,7 +97,7 @@ class AgentService(BaseService):
             Exception: If required fields are missing in the 'options' or
             the 'options' field itself is missing.
         """
-        options = service_account_info.get("options")
+        options = agent_info.get("options")
         if not options:
             raise Exception(
                 "The 'options' field is required but was not provided or is empty."
@@ -127,7 +127,7 @@ class AgentService(BaseService):
 
     @staticmethod
     def _construct_yaml_format(params: dict) -> dict:
-        """Constructs a YAML configuration based on service account details
+        """Constructs a YAML configuration based on agent details
         and Kubernetes service flags.
 
         Args:
