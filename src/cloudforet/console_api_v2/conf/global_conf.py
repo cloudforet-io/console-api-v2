@@ -84,3 +84,7 @@ CONNECTORS = {
         },
     },
 }
+
+# OpenCost Settings
+OPENCOST_PROMETHEUS_HOST = ""
+OPENCOST_PROMETHEUS_EXTERNAL_URL = ""
