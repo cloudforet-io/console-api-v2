@@ -1,7 +1,7 @@
 import yaml
 
 from cloudforet.console_api_v2.manager.cloudforet_manager import CloudforetManager
-
+from spaceone.core import config
 from spaceone.core.service import (
     BaseService,
     check_required,
@@ -148,10 +148,14 @@ class AgentService(BaseService):
         kube_state_metrics = params.get("kube_state_metrics")
         prometheus_node_exporter = params.get("prometheus_node_exporter")
 
+        prometheus_host = config.get_global("OPENCOST_PROMETHEUS_HOST")
+        prometheus_external_url = config.get_global("OPENCOST_PROMETHEUS_EXTERNAL_URL")
+
         default_yaml_format = {
             "cluster": {"name": cluster_name},
             "externalServices": {
                 "prometheus": {
+                    "host": prometheus_host,
                     "tenantId": service_account_id,
                     "basicAuth": {
                         "username": service_account_id,
@@ -165,7 +169,8 @@ class AgentService(BaseService):
                             "extraEnv": {
                                 "PROMETHEUS_HEADER_X_SCOPE_ORGID": service_account_id
                             },
-                        }
+                        },
+                        "prometheus": {"external": {"url": prometheus_external_url}},
                     }
                 },
             },
@@ -175,5 +180,4 @@ class AgentService(BaseService):
             default_yaml_format["kube-state-metrics"] = {"enabled": "false"}
         if prometheus_node_exporter == "true":
             default_yaml_format["prometheus-node-exporter"] = {"enabled": "false"}
-
         return default_yaml_format
