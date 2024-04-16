@@ -106,7 +106,7 @@ class AgentService(BaseService):
         cluster_name = options.get("cluster_name")
         kube_state_metrics = options.get("kube_state_metrics")
         prometheus_node_exporter = options.get("prometheus_node_exporter")
-        if not all([cluster_name, kube_state_metrics, prometheus_node_exporter]):
+        if not any([cluster_name, kube_state_metrics, prometheus_node_exporter]):
             missing_fields = []
             if "cluster_name" not in options:
                 missing_fields.append("cluster_name")
