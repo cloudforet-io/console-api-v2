@@ -176,8 +176,8 @@ class AgentService(BaseService):
             },
         }
 
-        if kube_state_metrics == "true":
+        if kube_state_metrics:
             default_yaml_format["kube-state-metrics"] = {"enabled": "false"}
-        if prometheus_node_exporter == "true":
+        if prometheus_node_exporter:
             default_yaml_format["prometheus-node-exporter"] = {"enabled": "false"}
         return default_yaml_format
