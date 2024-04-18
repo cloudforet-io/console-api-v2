@@ -161,18 +161,18 @@ class AgentService(BaseService):
                         "username": service_account_id,
                         "password": token,
                     },
-                },
+                }
+            },
+            "opencost": {
                 "opencost": {
-                    "opencost": {
-                        "exporter": {
-                            "defaultClusterId": cluster_name,
-                            "extraEnv": {
-                                "PROMETHEUS_HEADER_X_SCOPE_ORGID": service_account_id
-                            },
+                    "exporter": {
+                        "defaultClusterId": cluster_name,
+                        "extraEnv": {
+                            "PROMETHEUS_HEADER_X_SCOPE_ORGID": service_account_id
                         },
-                        "prometheus": {"external": {"url": prometheus_external_url}},
-                    }
-                },
+                    },
+                    "prometheus": {"external": {"url": prometheus_external_url}},
+                }
             },
         }
 
