@@ -28,7 +28,8 @@ setup(
     packages=find_packages(),
     install_requires=[
         'spaceone-core',
-        'spaceone-api'
+        'spaceone-api',
+        'typing-inspect'
     ],
     zip_safe=False,
 )
