@@ -89,7 +89,7 @@ class Auth(BaseAPI):
         )
         if refresh_token:
             return RedirectResponse(
-                f"{console_domain}/saml?sso_access_token={refresh_token}",
+                f"{console_domain}/saml?refresh_token={refresh_token}",
                 status_code=302,
             )
 
