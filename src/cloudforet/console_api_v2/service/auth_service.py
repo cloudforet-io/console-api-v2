@@ -58,7 +58,10 @@ class AuthService(BaseService):
         form_data = params.get("form_data")
         domain_id = params.get("domain_id")
 
-        credentials = self._extract_credentials(request, dict(form_data))
+        console_api_v2_endpoint = config.get_global("CONSOLE_API_V2_ENDPOINT")
+        credentials = self._extract_credentials(
+            request, console_api_v2_endpoint, dict(form_data)
+        )
         refresh_token = self._issue_token(credentials, domain_id)
         domain_name = self._get_domain_name(domain_id)
         return self._redirect_response(domain_name, refresh_token)
@@ -121,12 +124,14 @@ class AuthService(BaseService):
         )
 
     @staticmethod
-    def _extract_credentials(request: Request, form_data: dict) -> dict:
+    def _extract_credentials(
+        request: Request, console_api_v2_endpoint: str, form_data: dict
+    ) -> dict:
         return {
-            "http_host": request.client.host,
-            "server_port": str(request.url.port),
+            "http_host": console_api_v2_endpoint,
             "script_name": request.url.path,
             "post_data": form_data,
+            "https": "on",
         }
 
     @staticmethod
