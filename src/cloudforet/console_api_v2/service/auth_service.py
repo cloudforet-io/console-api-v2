@@ -131,6 +131,7 @@ class AuthService(BaseService):
             "http_host": console_api_v2_endpoint,
             "script_name": request.url.path,
             "post_data": form_data,
+            "https": "on",
         }
 
     @staticmethod
@@ -177,9 +178,7 @@ class AuthService(BaseService):
     @staticmethod
     def _get_acs_url(domain_name: str, domain_id: str) -> str:
         console_api_v2_endpoint = config.get_global("CONSOLE_API_V2_ENDPOINT")
-        acs_url = (
-            f"{console_api_v2_endpoint}/console-api/extension/auth/saml/{domain_id}"
-        )
+        acs_url = f"https://{console_api_v2_endpoint}/console-api/extension/auth/saml/{domain_id}"
 
         return acs_url
 
