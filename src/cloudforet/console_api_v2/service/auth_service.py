@@ -131,7 +131,6 @@ class AuthService(BaseService):
             "http_host": console_api_v2_endpoint,
             "script_name": request.url.path,
             "post_data": form_data,
-            "https": "on",
         }
 
     @staticmethod
