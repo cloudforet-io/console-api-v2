@@ -1,5 +1,6 @@
 import json
 import logging
+from typing import Union
 
 from fastapi import Request, Response
 from fastapi.responses import RedirectResponse
@@ -62,9 +63,13 @@ class AuthService(BaseService):
         credentials = self._extract_credentials(
             request, console_api_v2_endpoint, dict(form_data)
         )
-        refresh_token = self._issue_token(credentials, domain_id)
+
         domain_name = self._get_domain_name(domain_id)
-        return self._redirect_response(domain_name, refresh_token)
+        if credentials:
+            refresh_token = self._issue_token(credentials, domain_id)
+            return self._redirect_response(domain_name, refresh_token)
+        else:
+            return self._redirect_response(domain_name, None)
 
     def saml_sp_metadata(self, domain_id: str) -> Response:
         sp_entity_id = domain_id
@@ -162,7 +167,9 @@ class AuthService(BaseService):
         return response.get("name")
 
     @staticmethod
-    def _redirect_response(domain_name: str, refresh_token: str) -> RedirectResponse:
+    def _redirect_response(
+        domain_name: str, refresh_token: Union[str, None]
+    ) -> RedirectResponse:
         console_domain: str = config.get_global("CONSOLE_DOMAIN").format(
             domain_name=domain_name
         )
