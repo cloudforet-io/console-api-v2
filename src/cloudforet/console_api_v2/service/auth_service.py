@@ -169,11 +169,10 @@ class AuthService(BaseService):
 
         if refresh_token:
             return RedirectResponse(
-                f"{console_domain}/saml?refresh_token={refresh_token}",
-                status_code=302,
+                f"{console_domain}/saml?refresh_token={refresh_token}", status_code=302
             )
-
-        return RedirectResponse(f"{console_domain}", status_code=302)
+        else:
+            return RedirectResponse(f"{console_domain}/error-page/401", status_code=302)
 
     @staticmethod
     def _get_acs_url(domain_name: str, domain_id: str) -> str:
