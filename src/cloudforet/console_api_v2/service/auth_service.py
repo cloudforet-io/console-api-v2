@@ -63,13 +63,9 @@ class AuthService(BaseService):
         credentials = self._extract_credentials(
             request, console_api_v2_endpoint, dict(form_data)
         )
-
         domain_name = self._get_domain_name(domain_id)
-        if credentials:
-            refresh_token = self._issue_token(credentials, domain_id)
-            return self._redirect_response(domain_name, refresh_token)
-        else:
-            return self._redirect_response(domain_name, None)
+        refresh_token = self._issue_token(credentials, domain_id)
+        return self._redirect_response(domain_name, refresh_token)
 
     def saml_sp_metadata(self, domain_id: str) -> Response:
         sp_entity_id = domain_id
@@ -168,7 +164,7 @@ class AuthService(BaseService):
 
     @staticmethod
     def _redirect_response(
-        domain_name: str, refresh_token: Union[str, None]
+        domain_name: str, refresh_token: str = None
     ) -> RedirectResponse:
         console_domain: str = config.get_global("CONSOLE_DOMAIN").format(
             domain_name=domain_name
