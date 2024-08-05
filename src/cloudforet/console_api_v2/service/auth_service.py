@@ -64,7 +64,13 @@ class AuthService(BaseService):
             request, console_api_v2_endpoint, dict(form_data)
         )
         domain_name = self._get_domain_name(domain_id)
-        refresh_token = self._issue_token(credentials, domain_id)
+
+        refresh_token = "unauthorized"
+        try:
+            refresh_token = self._issue_token(credentials, domain_id)
+        except Exception as e:
+            _LOGGER.error(f"[saml] failed to issue token: {e}")
+
         return self._redirect_response(domain_name, refresh_token)
 
     def saml_sp_metadata(self, domain_id: str) -> Response:
@@ -163,19 +169,14 @@ class AuthService(BaseService):
         return response.get("name")
 
     @staticmethod
-    def _redirect_response(
-        domain_name: str, refresh_token: str = None
-    ) -> RedirectResponse:
+    def _redirect_response(domain_name: str, refresh_token: str) -> RedirectResponse:
         console_domain: str = config.get_global("CONSOLE_DOMAIN").format(
             domain_name=domain_name
         )
 
-        if refresh_token:
-            return RedirectResponse(
-                f"{console_domain}/saml?refresh_token={refresh_token}", status_code=302
-            )
-        else:
-            return RedirectResponse(f"{console_domain}/error-page/401", status_code=302)
+        return RedirectResponse(
+            f"{console_domain}/saml?refresh_token={refresh_token}", status_code=302
+        )
 
     @staticmethod
     def _get_acs_url(domain_name: str, domain_id: str) -> str:
