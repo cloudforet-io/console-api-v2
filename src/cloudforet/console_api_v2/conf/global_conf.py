@@ -30,6 +30,7 @@ For a more comprehensive understanding of the Cloudforet API, please visit our [
 | [Secret](/secret/docs) | Secret Service | 
 | [Statistics](/statistics/docs) | Statistics Service | 
 | [Search](/search/docs) | Search Service |
+| [Opsflow](/opsflow/docs) | Opsflow Service |
 """
 
 OPENAPI_JSON_DIRS = [
@@ -47,6 +48,7 @@ OPENAPI_JSON_DIRS = [
     "/opt/openapi/cloudforet/api/secret/v1/*.json",
     "/opt/openapi/cloudforet/api/statistics/v1/*.json",
     "/opt/openapi/cloudforet/api/search/v1/*.json",
+    "/opt/openapi/cloudforet/api/opsflow/v1/*.json",
 ]
 
 UVICORN_OPTIONS = {"factory": True}
