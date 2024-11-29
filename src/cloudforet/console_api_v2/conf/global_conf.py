@@ -17,7 +17,7 @@ For a more comprehensive understanding of the Cloudforet API, please visit our [
 | **Name** | **Description**  |
 |---|---|
 | [Identity](/identity/docs) | Identity Service | 
-| [Inventory](/inventory/docs) | Inventory Service | 
+| [Inventory](/inventory/docs) | Inventory Service |
 | [Cost Analysis](/cost-analysis/docs) | Cost Analysis Service |
 | [Monitoring](/monitoring/docs) |Monitoring Service | 
 | [Notification](/notification/docs) | Notification Service | 
@@ -36,6 +36,7 @@ For a more comprehensive understanding of the Cloudforet API, please visit our [
 OPENAPI_JSON_DIRS = [
     "/opt/openapi/cloudforet/api/identity/v2/*.json",
     "/opt/openapi/cloudforet/api/inventory/v1/*.json",
+    "/opt/openapi/cloudforet/api/inventory_v2/v1/*.json",
     "/opt/openapi/cloudforet/api/cost_analysis/v1/*.json",
     "/opt/openapi/cloudforet/api/monitoring/v1/*.json",
     "/opt/openapi/cloudforet/api/notification/v1/*.json",
@@ -69,20 +70,22 @@ CONNECTORS = {
     "SpaceConnector": {
         "backend": "spaceone.core.connector.space_connector.SpaceConnector",
         "endpoints": {
-            "identity": "grpc://identity:50051/v1",
-            "inventory": "grpc://inventory:50051/v1",
-            "repository": "grpc://repository:50051/v1",
-            "secret": "grpc://secret:50051/v1",
-            "plugin": "grpc://plugin:50051/v1",
-            "monitoring": "grpc://monitoring:50051/v1",
-            "statistics": "grpc://statistics:50051/v1",
-            "notification": "grpc://notification:50051/v1",
-            "config": "grpc://config:50051/v1",
-            "cost_analysis": "grpc://cost-analysis:50051/v1",
-            "board": "grpc://board:50051/v1",
-            "file_manager": "grpc://file-manager:50051/v1",
-            "dashboard": "grpc://dashboard:50051/v1",
-            "search": "grpc://search:50051/v1",
+            "identity": "grpc://identity:50051",
+            "inventory": "grpc://inventory:50051",
+            "inventory_v2": "grpc://inventory-v2:50051",
+            "repository": "grpc://repository:50051",
+            "secret": "grpc://secret:50051",
+            "plugin": "grpc://plugin:50051",
+            "monitoring": "grpc://monitoring:50051",
+            "statistics": "grpc://statistics:50051",
+            "notification": "grpc://notification:50051",
+            "config": "grpc://config:50051",
+            "cost_analysis": "grpc://cost-analysis:50051",
+            "board": "grpc://board:50051",
+            "file_manager": "grpc://file-manager:50051",
+            "dashboard": "grpc://dashboard:50051",
+            "search": "grpc://search:50051",
+            "opsflow": "grpc://opsflow:50051",
         },
     },
 }
