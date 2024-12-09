@@ -18,6 +18,7 @@ For a more comprehensive understanding of the Cloudforet API, please visit our [
 |---|---|
 | [Identity](/identity/docs) | Identity Service | 
 | [Inventory](/inventory/docs) | Inventory Service |
+| [Inventory v2] (/inventory-v2/docs) | Inventory v2 Service |
 | [Cost Analysis](/cost-analysis/docs) | Cost Analysis Service |
 | [Monitoring](/monitoring/docs) |Monitoring Service | 
 | [Notification](/notification/docs) | Notification Service | 
