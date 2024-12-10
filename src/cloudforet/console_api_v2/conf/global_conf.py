@@ -32,6 +32,7 @@ For a more comprehensive understanding of the Cloudforet API, please visit our [
 | [Statistics](/statistics/docs) | Statistics Service | 
 | [Search](/search/docs) | Search Service |
 | [Opsflow](/opsflow/docs) | Opsflow Service |
+| [Alert Manager](/alert-manager/docs) | Alert Manager Service |
 """
 
 OPENAPI_JSON_DIRS = [
@@ -51,6 +52,7 @@ OPENAPI_JSON_DIRS = [
     "/opt/openapi/cloudforet/api/statistics/v1/*.json",
     "/opt/openapi/cloudforet/api/search/v1/*.json",
     "/opt/openapi/cloudforet/api/opsflow/v1/*.json",
+    "/opt/openapi/cloudforet/api/alert_manager/v1/*.json",
 ]
 
 UVICORN_OPTIONS = {"factory": True}
@@ -87,6 +89,7 @@ CONNECTORS = {
             "dashboard": "grpc://dashboard:50051",
             "search": "grpc://search:50051",
             "opsflow": "grpc://opsflow:50051",
+            "alert_manager": "grpc://alert-manager:50051",
         },
     },
 }
