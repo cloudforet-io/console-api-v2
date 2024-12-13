@@ -22,22 +22,28 @@ router = InferringRouter(include_in_schema=False)
 
 
 def _add_mounted_app_paths(app, path=None):
-    mounted_app_paths = [f'{path}{route.path}' for route in app.routes if route.method == 'POST']
+    mounted_app_paths = [
+        f"{path}{route.path}" for route in app.routes if route.method == "POST"
+    ]
     return mounted_app_paths
 
 
 def _add_paths_from_openapi_json():
     openapi_paths = []
-    openapi_json_dirs = config.get_global('OPENAPI_JSON_DIRS')
+    openapi_json_dirs = config.get_global("OPENAPI_JSON_DIRS")
 
     for openapi_json_dir in openapi_json_dirs:
         openapi_json_files = glob.glob(os.path.join(openapi_json_dir))
-        with open(openapi_json_files[0], 'r') as f:
-            openapi_json = json.loads(f.read())
-            for path, value in openapi_json.get('paths').items():
-                method = [next(iter(value))]
-                if method == ['post']:
-                    openapi_paths.append(path)
+        if openapi_json_files:
+            with open(openapi_json_files[0], "r") as f:
+                openapi_json = json.loads(f.read())
+                for path, value in openapi_json.get("paths").items():
+                    method = [next(iter(value))]
+                    if method == ["post"]:
+                        openapi_paths.append(path)
+        else:
+            _LOGGER.warning(f"openapi.json not found in {openapi_json_dir}")
+
     return openapi_paths
 
 
@@ -45,9 +51,9 @@ def _path_exists(path, routes):
     paths = []
 
     for route in routes:
-        if not hasattr(route, 'methods'):
+        if not hasattr(route, "methods"):
             paths.extend(_add_mounted_app_paths(route.app, route.path))
-        elif '/openapi.json' in route.path and len(route.path.split('/')) > 2:
+        elif "/openapi.json" in route.path and len(route.path.split("/")) > 2:
             paths.extend(_add_paths_from_openapi_json())
         else:
             paths.append(route.path)
@@ -57,10 +63,10 @@ def _path_exists(path, routes):
     return False
 
 
-@cacheable(key='path:{service}:{resource}:{verb}', alias='local')
+@cacheable(key="path:{service}:{resource}:{verb}", alias="local")
 def _request_path_validator(service, resource, verb, app):
     routes = app.routes
-    path = os.path.join('/', service, resource, verb)
+    path = os.path.join("/", service, resource, verb)
 
     if not _path_exists(path, routes):
         return False
@@ -69,36 +75,42 @@ def _request_path_validator(service, resource, verb, app):
 
 
 def _convert_service_resource_verb(service, resource, verb):
-    service = service.replace('-','_').lower()
+    service = service.replace("-", "_").lower()
 
-    if resource == 'api-key':
-        resource = 'APIKey'
+    if resource == "api-key":
+        resource = "APIKey"
     else:
-        resource = resource.replace('-', ' ').title().replace(' ', '')
+        resource = resource.replace("-", " ").title().replace(" ", "")
 
-    verb = verb.replace('-', '_').lower()
+    verb = verb.replace("-", "_").lower()
     return service, resource, verb
 
 
 @cbv(router)
 class Proxy(BaseAPI):
     token: HTTPAuthorizationCredentials = Depends(_AUTH_SCHEME)
-    service = 'console-api'
+    service = "console-api"
 
-    @router.post('/{service}/{resource}/{verb}')
+    @router.post("/{service}/{resource}/{verb}")
     @exception_handler
     async def proxy_api(self, request: Request, service, resource, verb):
         if not _request_path_validator(service, resource, verb, request.app):
-            raise ERROR_UNSUPPORTED_API(reason=f'method: {request.method}, path: {request.url.path}')
+            raise ERROR_UNSUPPORTED_API(
+                reason=f"method: {request.method}, path: {request.url.path}"
+            )
 
-        service, resource, verb = _convert_service_resource_verb(service, resource, verb)
+        service, resource, verb = _convert_service_resource_verb(
+            service, resource, verb
+        )
 
         if self.token:
-            params, metadata = await self.parse_request(request, self.token.credentials, resource, verb)
+            params, metadata = await self.parse_request(
+                request, self.token.credentials, resource, verb
+            )
         else:
             params, metadata = await self.parse_request(request, None, resource, verb)
 
         with self.locator.get_service(ProxyService, metadata) as proxy_service:
-            params['grpc_method'] = f'{service}.{resource}.{verb}'
+            params["grpc_method"] = f"{service}.{resource}.{verb}"
             response = await run_in_threadpool(proxy_service.dispatch_api, params)
             return response
