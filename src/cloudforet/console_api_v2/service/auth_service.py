@@ -7,7 +7,12 @@ from fastapi.responses import RedirectResponse
 from spaceone.core import cache, config
 from spaceone.core.auth.jwt import JWTAuthenticator, JWTUtil
 from spaceone.core.error import ERROR_AUTHENTICATE_FAILURE
-from spaceone.core.service import BaseService, event_handler, transaction
+from spaceone.core.service import (
+    BaseService,
+    event_handler,
+    transaction,
+    authentication_handler,
+)
 
 from cloudforet.console_api_v2.manager.cloudforet_manager import CloudforetManager
 from cloudforet.console_api_v2.service.proxy_service import ProxyService
@@ -16,6 +21,7 @@ _LOGGER = logging.getLogger(__name__)
 
 
 @event_handler
+@authentication_handler
 class AuthService(BaseService):
     resource = "Auth"
 
