@@ -2,7 +2,7 @@ REST_TITLE = "REST API for Cloudforet"
 REST_DESCRIPTION = """
 You need to issue api key to use API.
 <br>
-Please read this user [guide](https://cloudforet.io/docs/guides/my-page/access-with-api-cli/) first.
+Please read this user [guide](https://cloudforet.io/docs/guides/iam/iam-app/) first.
 
 After issuing api key, enter the api key in the [Authorize] button on the right side of the screen.
 <br>
@@ -64,6 +64,23 @@ LOG = {
             "rules": {"Auth.basic": ["token", "password"], "Proxy.dispatch": ["token"]}
         }
     },
+}
+
+# Cache Settings
+CACHES = {
+    "default": {},
+    "local": {
+        "backend": "spaceone.core.cache.local_cache.LocalCache",
+        "max_size": 128,
+        "ttl": 300,
+    },
+}
+
+# Handler Settings
+HANDLERS = {
+    # "authentication": [{
+    #     "backend": "cloudforet.console_api_v2.handler.authentication_handler:ConsoleAPIAuthenticationHandler"
+    # }],
 }
 
 # This value is intended for overriding the system token
