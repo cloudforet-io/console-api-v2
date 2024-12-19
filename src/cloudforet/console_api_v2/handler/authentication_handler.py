@@ -31,11 +31,8 @@ class ConsoleAPIAuthenticationHandler(SpaceONEAuthenticationHandler):
                 token,
                 options={"verify_signature": False},
             )
-
             token_info = decoded_payload
-
             return token_info
 
         except Exception as e:
-            _LOOGER.error(f"Failed to decode token: {e}")
-            raise ERROR_PERMISSION_DENIED()
+            _LOOGER.error(f"Failed to decode token: {e}, {token}", exc_info=True)
