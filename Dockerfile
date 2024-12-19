@@ -1,13 +1,13 @@
 FROM cloudforet/python-core:2.0
 ARG PACKAGE_VERSION
-ARG BRANCH_NAME
-ENV PYTHONUNBUFFERED 1
-ENV SPACEONE_PORT 8000
-ENV SRC_DIR /tmp/src
-ENV CONF_DIR /etc/spaceone
-ENV LOG_DIR /var/log/spaceone
-ENV GIT_DIR /tmp/git
-ENV OPENAPI_JSON_DIR /opt/openapi
+ARG BRANCH_NAME=master
+ENV PYTHONUNBUFFERED=1
+ENV SPACEONE_PORT=8000
+ENV SRC_DIR=/tmp/src
+ENV CONF_DIR=/etc/spaceone
+ENV LOG_DIR=/var/log/spaceone
+ENV GIT_DIR=/tmp/git
+ENV OPENAPI_JSON_DIR=/opt/openapi
 ENV PACKAGE_VERSION=$PACKAGE_VERSION
 
 COPY pkg/pip_requirements.txt pip_requirements.txt
