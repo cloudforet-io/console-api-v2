@@ -33,8 +33,7 @@ def _add_paths_from_openapi_json():
     openapi_json_dirs = config.get_global("OPENAPI_JSON_DIRS")
 
     for openapi_json_dir in openapi_json_dirs:
-        openapi_json_files = glob.glob(os.path.join(openapi_json_dir))
-        if openapi_json_files:
+        if openapi_json_files := glob.glob(os.path.join(openapi_json_dir)):
             with open(openapi_json_files[0], "r") as f:
                 openapi_json = json.loads(f.read())
                 for path, value in openapi_json.get("paths").items():
