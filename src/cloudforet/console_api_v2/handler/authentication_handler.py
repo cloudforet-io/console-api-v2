@@ -13,7 +13,8 @@ class ConsoleAPIAuthenticationHandler(SpaceONEAuthenticationHandler):
     def verify(self, params: dict) -> None:
         if token := self._get_token_from_transaction():
             token_info = self._extract_token_info(token)
-            self._update_meta(token_info)
+            if isinstance(token_info, dict):
+                self._update_meta(token_info)
 
     @staticmethod
     def _get_token_from_transaction() -> Union[str, None]:
