@@ -20,8 +20,8 @@ from cloudforet.console_api_v2.service.proxy_service import ProxyService
 _LOGGER = logging.getLogger(__name__)
 
 
-@event_handler
 @authentication_handler
+@event_handler
 class AuthService(BaseService):
     resource = "Auth"
 
