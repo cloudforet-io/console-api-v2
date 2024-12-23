@@ -7,8 +7,8 @@ from cloudforet.console_api_v2.manager.cloudforet_manager import CloudforetManag
 _LOGGER = logging.getLogger(__name__)
 
 
-@event_handler
 @authentication_handler
+@event_handler
 class ProxyService(BaseService):
     resource = "Proxy"
 

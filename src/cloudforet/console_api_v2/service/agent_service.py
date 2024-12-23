@@ -14,8 +14,8 @@ from spaceone.core.error import ERROR_AUTHENTICATE_FAILURE
 from cloudforet.console_api_v2.service.auth_service import AuthService
 
 
-@event_handler
 @authentication_handler
+@event_handler
 class AgentService(BaseService):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
