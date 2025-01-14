@@ -1,2 +1,4 @@
-spaceone-core
-spaceone-api
+spaceone-core==1.11.1.dev12
+spaceone-api==1.11.2
+fastapi==0.95.1
+fastapi-utils==0.2.1

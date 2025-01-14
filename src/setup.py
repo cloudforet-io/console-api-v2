@@ -15,23 +15,20 @@
 
 from setuptools import setup, find_packages
 
-with open('VERSION', 'r') as f:
+with open("VERSION", "r") as f:
     VERSION = f.read().strip()
     f.close()
 
 setup(
-    name='cloudforet-console-api-v2',
+    name="cloudforet-console-api-v2",
     version=VERSION,
-    description='Cloudforet Console API v2 Service',
-    long_description='',
-    url='https://cloudforet.io/',
-    author='Cloudforet Admin',
-    author_email='admin@cloudforet.io',
-    license='Apache License 2.0',
+    description="Cloudforet Console API v2 Service",
+    long_description="",
+    url="https://cloudforet.io/",
+    author="Cloudforet Admin",
+    author_email="admin@cloudforet.io",
+    license="Apache License 2.0",
     packages=find_packages(),
-    install_requires=[
-        'spaceone-core',
-        'spaceone-api'
-    ],
+    install_requires=["spaceone-core==1.11.1.dev12", "spaceone-api==1.11.2"],
     zip_safe=False,
 )

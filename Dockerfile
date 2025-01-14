@@ -1,14 +1,14 @@
 FROM python:3.8
 
-ENV PYTHONUNBUFFERED 1
-ENV SPACEONE_PORT 50051
-ENV SERVER_TYPE grpc
-ENV PKG_DIR /tmp/pkg
-ENV SRC_DIR /tmp/src
-ENV CONF_DIR /etc/spaceone
-ENV LOG_DIR /var/log/spaceone
-ENV EXTENSION_NAME extension
-ENV EXTENSION_SRC_DIR /opt/spaceone
+ENV PYTHONUNBUFFERED=1
+ENV SPACEONE_PORT=50051
+ENV SERVER_TYPE=grpc
+ENV PKG_DIR=/tmp/pkg
+ENV SRC_DIR=/tmp/src
+ENV CONF_DIR=/etc/spaceone
+ENV LOG_DIR=/var/log/spaceone
+ENV EXTENSION_NAME=extension
+ENV EXTENSION_SRC_DIR=/opt/spaceone
 
 
 COPY pkg/*.txt ${PKG_DIR}/
@@ -17,7 +17,7 @@ RUN pip install --upgrade pip && \
     pip install --upgrade -r ${PKG_DIR}/pip_requirements.txt
 
 ARG CACHEBUST=1
-RUN pip install --upgrade --pre spaceone-core spaceone-api
+RUN pip install --upgrade --pre spaceone-core==1.11.1.dev12 spaceone-api==1.11.2
 
 COPY src ${SRC_DIR}
 WORKDIR ${SRC_DIR}
