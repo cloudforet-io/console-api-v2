@@ -18,7 +18,6 @@ For a more comprehensive understanding of the Cloudforet API, please visit our [
 |---|---|
 | [Identity](/identity/docs) | Identity Service | 
 | [Inventory](/inventory/docs) | Inventory Service |
-| [Inventory v2](/inventory-v2/docs) | Inventory v2 Service |
 | [Cost Analysis](/cost-analysis/docs) | Cost Analysis Service |
 | [Monitoring](/monitoring/docs) |Monitoring Service | 
 | [Notification](/notification/docs) | Notification Service | 
@@ -38,7 +37,7 @@ For a more comprehensive understanding of the Cloudforet API, please visit our [
 OPENAPI_JSON_DIRS = [
     "/opt/openapi/cloudforet/api/identity/v2/*.json",
     "/opt/openapi/cloudforet/api/inventory/v1/*.json",
-    "/opt/openapi/cloudforet/api/inventory_v2/v1/*.json",
+    # "/opt/openapi/cloudforet/api/inventory_v2/v1/*.json",
     "/opt/openapi/cloudforet/api/cost_analysis/v1/*.json",
     "/opt/openapi/cloudforet/api/monitoring/v1/*.json",
     "/opt/openapi/cloudforet/api/notification/v1/*.json",
@@ -92,7 +91,7 @@ CONNECTORS = {
         "endpoints": {
             "identity": "grpc://identity:50051",
             "inventory": "grpc://inventory:50051",
-            "inventory_v2": "grpc://inventory-v2:50051",
+            # "inventory_v2": "grpc://inventory-v2:50051",
             "repository": "grpc://repository:50051",
             "secret": "grpc://secret:50051",
             "plugin": "grpc://plugin:50051",
