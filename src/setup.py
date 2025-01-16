@@ -31,5 +31,10 @@ setup(
         'spaceone-api',
         'typing-inspect'
     ],
+    package_data={
+        "cloudforet": [
+            "console_api_v2/static/*",
+        ]
+    },
     zip_safe=False,
 )
