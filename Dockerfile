@@ -39,4 +39,4 @@ RUN pip install --upgrade spaceone-api
 EXPOSE ${SPACEONE_PORT}
 
 ENTRYPOINT ["spaceone"]
-CMD ["run", "rest-server", "cloudforet.console_api_v2", "-m", "/opt", "--host", "0.0.0.0"]
+CMD ["run", "rest-server", "cloudforet.console_api_v2", "-m", "/opt"]
