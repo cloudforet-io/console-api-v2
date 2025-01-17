@@ -3,7 +3,7 @@ import glob
 import json
 import os
 
-from fastapi import APIRouter, Request, FastAPI
+from fastapi import APIRouter, Request
 from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.responses import FileResponse
 
@@ -14,10 +14,7 @@ from cloudforet.console_api_v2.error.swagger import *
 
 _LOGGER = logging.getLogger(__name__)
 
-app = FastAPI()
 router = APIRouter(include_in_schema=False)
-
-SWAGGER_UI_PATH = os.path.join(os.path.dirname(__file__), f"../../static")
 
 
 @cacheable(key='openapi-json:{service}', alias='local')
@@ -38,19 +35,28 @@ def _get_openapi_json_data(service):
 
 @cacheable(key='swagger-ui-html:{service}', alias='local')
 def _get_swagger_ui_html(request: Request, service):
-    return get_swagger_ui_html(
-        openapi_url=f'/{service}/openapi.json',
-        title=f'{service.title().replace("-", " ")} API' + ' - Swagger UI',
-        oauth2_redirect_url=request.app.swagger_ui_oauth2_redirect_url,
-        init_oauth=request.app.swagger_ui_init_oauth,
-        swagger_css_url="/static/swagger_ui.css",
-        swagger_js_url="/static/swagger_ui_bundle.js",
-        swagger_favicon_url="/static/favicon.png",
-    )
+    static_swagger_ui = config.get_global('STATIC_SWAGGER_UI', False)
+
+    swagger_ui_options = {
+        "openapi_url": f'/{service}/openapi.json',
+        "title": f'{service.title().replace("-", " ")} API - Swagger UI',
+        "oauth2_redirect_url": request.app.swagger_ui_oauth2_redirect_url,
+        "init_oauth": request.app.swagger_ui_init_oauth,
+    }
+
+    if static_swagger_ui:
+        swagger_ui_options.update({
+            "swagger_css_url": "/static/swagger-ui.css",
+            "swagger_js_url": "/static/swagger-ui-bundle.js",
+            "swagger_favicon_url": "/static/favicon.png",
+        })
+
+    return get_swagger_ui_html(**swagger_ui_options)
 
 
-def _get_swagger_ui_files(filename):
-    file_path = os.path.join(SWAGGER_UI_PATH, filename)
+def _get_static_swagger_ui_file(filename: str):
+    swagger_ui_file_dir = config.get_global('STATIC_SWAGGER_UI_DIR')
+    file_path = os.path.join(swagger_ui_file_dir, filename)
     if os.path.exists(file_path):
         return FileResponse(file_path)
     _LOGGER.error(f'Swagger UI file not found {filename}')
@@ -71,4 +77,4 @@ async def openapi_json(service: str):
 
 @router.get("/static/{filename:path}")
 async def swagger_ui(filename: str):
-    return _get_swagger_ui_files(filename)
+    return _get_static_swagger_ui_file(filename)
