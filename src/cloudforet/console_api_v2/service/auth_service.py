@@ -1,6 +1,8 @@
 import json
 import logging
+import os
 from typing import Union
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from fastapi import Request, Response
 from fastapi.responses import RedirectResponse
@@ -16,6 +18,11 @@ from spaceone.core.service import (
 
 from cloudforet.console_api_v2.manager.cloudforet_manager import CloudforetManager
 from cloudforet.console_api_v2.service.proxy_service import ProxyService
+
+TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), f"../template")
+JINJA_ENV = Environment(
+    loader=FileSystemLoader(searchpath=TEMPLATE_PATH), autoescape=select_autoescape()
+)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -175,14 +182,20 @@ class AuthService(BaseService):
         return response.get("name")
 
     @staticmethod
-    def _redirect_response(domain_name: str, refresh_token: str) -> RedirectResponse:
+    def _redirect_response(
+        domain_name: str, refresh_token: str
+    ) -> Union[RedirectResponse, Response]:
         console_domain: str = config.get_global("CONSOLE_DOMAIN").format(
             domain_name=domain_name
         )
 
-        return RedirectResponse(
-            f"{console_domain}/saml?refresh_token={refresh_token}", status_code=302
+        template = JINJA_ENV.get_template(f"saml_loading.html")
+        content = template.render(
+            console_domain=console_domain,
+            refresh_token=refresh_token,
         )
+
+        return Response(content=content, media_type="text/html")
 
     @staticmethod
     def _get_acs_url(domain_name: str, domain_id: str) -> str:
