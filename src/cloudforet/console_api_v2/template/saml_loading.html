@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .spinner {
+            border: 8px solid #f3f3f3; /* Light grey */
+            border-top: 8px solid #808080; /* Gray color */
+            border-radius: 50%;
+            width: 60px; /* 스피너 크기 */
+            height: 60px; /* 스피너 크기 */
+            animation: spin 1s linear infinite; /* 애니메이션 */
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="spinner"></div>
+
+<script>
+    const redirectUrl = '{{ console_domain }}/saml?refresh_token={{ refresh_token }}';
+    const redirect = () => {
+        window.location.href = redirectUrl;
+    };
+
+    setTimeout(() => {
+        history.pushState(null, '', window.location.href);
+        redirect();
+    }, 2000);
+    
+</script>
+</body>
+</html>
