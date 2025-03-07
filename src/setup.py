@@ -17,19 +17,20 @@ import os
 from setuptools import setup, find_packages
 
 setup(
-    name='cloudforet-console-api-v2',
-    version=os.environ.get('PACKAGE_VERSION'),
-    description='Cloudforet Console API v2 Service',
-    long_description='',
-    url='https://cloudforet.io/',
-    author='Cloudforet Admin',
-    author_email='admin@cloudforet.io',
-    license='Apache License 2.0',
+    name="cloudforet-console-api-v2",
+    version=os.environ.get("PACKAGE_VERSION"),
+    description="Cloudforet Console API v2 Service",
+    long_description="",
+    url="https://cloudforet.io/",
+    author="Cloudforet Admin",
+    author_email="admin@cloudforet.io",
+    license="Apache License 2.0",
     packages=find_packages(),
-    install_requires=[
-        'spaceone-core',
-        'spaceone-api',
-        'typing-inspect'
-    ],
+    install_requires=["spaceone-core", "spaceone-api", "typing-inspect"],
+    package_data={
+        "cloudforet": [
+            "console_api_v2/template/*.html",
+        ]
+    },
     zip_safe=False,
 )
