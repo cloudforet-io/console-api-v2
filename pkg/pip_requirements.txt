@@ -2,3 +2,4 @@ spaceone-api
 typing-inspect
 python-multipart
 PyJWT
+openpyxl

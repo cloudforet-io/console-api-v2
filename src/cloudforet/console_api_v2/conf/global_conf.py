@@ -70,7 +70,7 @@ CACHES = {
     "default": {},
     "local": {
         "backend": "spaceone.core.cache.local_cache.LocalCache",
-        "max_size": 128,
+        "max_size": 1024,
         "ttl": 300,
     },
 }

@@ -21,6 +21,13 @@ ROUTER = [
         },
     },
     {
+        "router_path": "cloudforet.console_api_v2.interface.rest.extension.excel:router",
+        "router_options": {
+            "prefix": "/console-api/extension/excel",
+            "tags": ["console-api > extension > excel"],
+        },
+    },
+    {
         "router_path": "cloudforet.console_api_v2.interface.rest.swagger:router",
     },
     {
