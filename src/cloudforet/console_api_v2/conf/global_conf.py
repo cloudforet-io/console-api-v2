@@ -60,7 +60,16 @@ LOG = {
     "loggers": {"cloudforet": {"level": "DEBUG", "handlers": ["console"]}},
     "filters": {
         "masking": {
-            "rules": {"Auth.basic": ["token", "password"], "Proxy.dispatch": ["token"]}
+            "rules": {
+                "Auth.basic": ["token", "password"],
+                "Proxy.dispatch_api": [
+                    "token",
+                    "credentials",
+                    "secret_data",
+                    "password",
+                    "admin",
+                ],
+            }
         }
     },
 }
