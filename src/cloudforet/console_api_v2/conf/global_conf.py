@@ -60,7 +60,16 @@ LOG = {
     "loggers": {"cloudforet": {"level": "DEBUG", "handlers": ["console"]}},
     "filters": {
         "masking": {
-            "rules": {"Auth.basic": ["token", "password"], "Proxy.dispatch": ["token"]}
+            "rules": {
+                "Auth.basic": ["token", "password"],
+                "Proxy.dispatch_api": [
+                    "token",
+                    "credentials",
+                    "secret_data",
+                    "password",
+                    "admin",
+                ],
+            }
         }
     },
 }
@@ -89,7 +98,7 @@ CONNECTORS = {
     "SpaceConnector": {
         "backend": "spaceone.core.connector.space_connector.SpaceConnector",
         "endpoints": {
-            "identity": "grpc://identity:50051",
+            "identity": "grpc://localhost:50051",
             "inventory": "grpc://inventory:50051",
             # "inventory_v2": "grpc://inventory-v2:50051",
             "repository": "grpc://repository:50051",
