@@ -17,7 +17,7 @@ import os
 from setuptools import setup, find_packages
 
 setup(
-    name='cloudforet-console-api-v2',
+    name='cloudforet_console_api_v2',
     version=os.environ.get('PACKAGE_VERSION'),
     description='Cloudforet Console API v2 Service',
     long_description='',
