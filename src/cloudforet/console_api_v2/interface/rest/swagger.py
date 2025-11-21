@@ -5,12 +5,12 @@ import os
 
 from fastapi import APIRouter, Request
 from fastapi.openapi.docs import get_swagger_ui_html
+from fastapi.responses import FileResponse
 
 from spaceone.core import config
 from spaceone.core.cache import cacheable
 from spaceone.core.fastapi.api import exception_handler
 from cloudforet.console_api_v2.error.swagger import *
-
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -35,12 +35,32 @@ def _get_openapi_json_data(service):
 
 @cacheable(key='swagger-ui-html:{service}', alias='local')
 def _get_swagger_ui_html(request: Request, service):
-    return get_swagger_ui_html(
-        openapi_url=f'/{service}/openapi.json',
-        title=f'{service.title().replace("-", " ")} API' + ' - Swagger UI',
-        oauth2_redirect_url=request.app.swagger_ui_oauth2_redirect_url,
-        init_oauth=request.app.swagger_ui_init_oauth,
-    )
+    static_swagger_ui = config.get_global('STATIC_SWAGGER_UI', False)
+
+    swagger_ui_options = {
+        "openapi_url": f'/{service}/openapi.json',
+        "title": f'{service.title().replace("-", " ")} API - Swagger UI',
+        "oauth2_redirect_url": request.app.swagger_ui_oauth2_redirect_url,
+        "init_oauth": request.app.swagger_ui_init_oauth,
+    }
+
+    if static_swagger_ui:
+        swagger_ui_options.update({
+            "swagger_css_url": "/static/swagger-ui.css",
+            "swagger_js_url": "/static/swagger-ui-bundle.js",
+            "swagger_favicon_url": "/static/favicon.png",
+        })
+
+    return get_swagger_ui_html(**swagger_ui_options)
+
+
+def _get_static_swagger_ui_file(filename: str):
+    swagger_ui_file_dir = config.get_global('STATIC_SWAGGER_UI_DIR')
+    file_path = os.path.join(swagger_ui_file_dir, filename)
+    if os.path.exists(file_path):
+        return FileResponse(file_path)
+    _LOGGER.error(f'Swagger UI file not found {filename}')
+    raise ERROR_NOT_FOUND(key='file', value=filename)
 
 
 @router.get('/{service}/docs')
@@ -55,6 +75,6 @@ async def openapi_json(service: str):
     return _get_openapi_json_data(service)
 
 
-
-
-
+@router.get("/static/{filename:path}")
+async def swagger_ui(filename: str):
+    return _get_static_swagger_ui_file(filename)
