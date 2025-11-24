@@ -22,7 +22,7 @@ class Agent(BaseAPI):
 
     @router.get("/kubernetes")
     @exception_handler
-    async def kubernetes(self, request: Request, service_account_id: str):
+    async def kubernetes(self, request: Request, service_account_id: str) -> Response:
         token = self.token.credentials
 
         agent_service = AgentService()
