@@ -54,6 +54,10 @@ OPENAPI_JSON_DIRS = [
     "/opt/openapi/cloudforet/api/alert_manager/v1/*.json",
 ]
 
+# Swagger UI Settings
+STATIC_SWAGGER_UI = False
+STATIC_SWAGGER_UI_DIR = "/opt/swagger-ui"
+
 UVICORN_OPTIONS = {"factory": True}
 
 LOG = {
